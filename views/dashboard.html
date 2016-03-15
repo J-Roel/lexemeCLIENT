@@ -1,27 +1,18 @@
-
-<header>
-       <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <ul>
-                  <div class="col-md-4">
-                        <div class="navbar-brand">Cap-stone</div>
-                  </div>
-                  <div class="col-md-8 text-right">
-                        <div class="navbar-header navbar-right">
-                              <div class="navbar-brand">
-                              	<a href="#/">Home</a>
-                              </div>
-                              <div class="navbar-brand">
-                              <a href="#/create-user">Register</a>
-                              </div>
-                        </div>
-                  </div>
-                  </ul>
-            </div>
-      </nav>
-</header>
+<div ng-include src="'../views/partials/header.html'"></div>
 
 <button ng-click="UC.getAllUsers();"></button>
 <pre>
-    {{UC.currentUser}}
+    {{ UC.currentUser }}
 </pre>
+
+
+
+
+
+
+
+
+
+
+
+<div ng-include src="'../views/partials/footer.html'"></div>

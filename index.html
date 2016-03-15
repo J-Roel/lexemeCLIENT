@@ -8,8 +8,11 @@
 
 <body ng-cloak>
 
+
 <div ng-controller="MainCtrl as MC">
-	<div ng-view></div>
+	<div ng-controller="LoginController as LC">
+		<div ng-view></div>
+	</div>
 </div>
 
 	<!-- Load AngularJS -->

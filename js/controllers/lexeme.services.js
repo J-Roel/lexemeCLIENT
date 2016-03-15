@@ -54,7 +54,6 @@ function APIService($http){
 
 
 			callAPI : function(action, id, data){
-					console.log("callAPI: ", action, id, data);
 				//setup our api call and return true if successful
 				var goAhead = this.setCall(action, id);
 
@@ -62,9 +61,12 @@ function APIService($http){
 				{
 					if(data == {} || data == null || data == undefined)
 					{//if we have no data, then we make the api call like so		
+						console.log("We have NO data: ", data);
 						return $http(this.callinfo);
 					} else { //if we have data, then we pass our data
-						return $http(this.callinfo, data);
+						console.log("We have data: ", data);
+						this.callinfo.data = data;
+						return $http(this.callinfo);
 					}
 				}
 			}

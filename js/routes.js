@@ -7,7 +7,6 @@ app.config(function($routeProvider) {
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: "LoginController as LC"
       })
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
@@ -17,8 +16,8 @@ app.config(function($routeProvider) {
       	templateUrl: 'views/user-profile.html',
       	controller: "UserCtrl as UC",
       })
-      .when('/create-user', {
-      	templateUrl: 'views/create-user.html',
+      .when('/register', {
+      	templateUrl: 'views/register.html',
       	controller: "UserCtrl as UC",
       })
 });

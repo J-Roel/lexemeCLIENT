@@ -23,6 +23,7 @@ function APILogin($rootScope, $http, $location, $window) {
 	  	//html to show/hide elements
 	  	// - this is a helper function; not necessary, but it is the same
 	  	//used in the MainCtrl (lexeme.controller.js)
+	  	//kept it incase we ever need to check if user is still logged in
 	    isLoggedIn : function (){
 	    	if($window.sessionStorage.token){
 	      		$rootScope.loggedIn = true;
@@ -54,20 +55,8 @@ function APILogin($rootScope, $http, $location, $window) {
 	  				//token and user
 	  				//	-	token for authentication
 	    			$window.sessionStorage.token = data.token;
-
-	    			//We have to fandangle the user data returned
-	    			//a bit so we can access it via our sessionStorage
-	    			var user = {
-	    				username: data.user.username,
-	    				first_name : data.user.first_name,
-	    				last_name : data.user.last_name,
-	    				email : data.user.email,
-	    				image_url : data.user.image_url,
-	    				company_id : data.user.company_id,
-	    				role : data.user.role,
-	    				auth_role : data.user.auth_role
-	    			}
-	    			$window.sessionStorage.setItem('user', JSON.stringify(user));
+	    			//	-	user for ... user stuff
+	    			$window.sessionStorage.setItem('user', JSON.stringify(data.user));
 
 
 	    			//Set our rootScope variable so we an show/hide
@@ -100,7 +89,7 @@ function APILogin($rootScope, $http, $location, $window) {
 		logout : function () {
 			console.log("User has logged out");
     		delete $window.sessionStorage.token;
-    		delete $window.sessionStorage.profile;
+    		delete $window.sessionStorage.user;
 
     		//Set our rootScope variable so we an show/hide
 	    	//the correct elements

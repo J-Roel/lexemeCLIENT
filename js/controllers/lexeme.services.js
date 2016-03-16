@@ -18,10 +18,13 @@ function APIService($http){
 				console.log("Switch: ", action, id);
 				switch(action)
 				{
-					case 'getAllUsers' :
-						this.callinfo.method = 'GET';
-						this.callinfo.url = this.rootUrl + "users/";
-					break;
+
+
+					//USERS
+					// case 'getAllUsers' :
+					// 	this.callinfo.method = 'GET';
+					// 	this.callinfo.url = this.rootUrl + "users/";
+					// break;
 
 					case 'getUser' :
 						this.callinfo.method = 'GET';
@@ -42,8 +45,6 @@ function APIService($http){
 						this.callinfo.method = 'PUT';
 						this.callinfo.url = this.rootUrl + "users/" + id;
 					break;
-
-
 
 					default: //if there is no matching action return false
 						return false;

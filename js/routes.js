@@ -6,18 +6,17 @@ app.config(function($routeProvider) {
         templateUrl: 'views/home.html',
       })
       .when('/login', {
-        templateUrl: 'views/login.html',
+        templateUrl: 'views/login.html'
       })
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
-        controller: "UserCtrl as UC"        
+        controller: 'DashboardCtrl as DCtrl'    
       })
       .when('/user-profile/:id', {
       	templateUrl: 'views/user-profile.html',
-      	controller: "UserCtrl as UC",
+      	//controller: "UserCtrl as UC",
       })
       .when('/register', {
-      	templateUrl: 'views/register.html',
-      	controller: "UserCtrl as UC",
+      	templateUrl: 'views/register.html'
       })
 });

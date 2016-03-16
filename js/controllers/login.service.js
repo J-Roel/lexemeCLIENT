@@ -42,15 +42,33 @@ function APILogin($rootScope, $http, $location, $window) {
 			//validate user input if needed
 			console.log("USER SUBMIT LOGIN: ", user);
 
-			//Call our server to get token
+			//Call our server to authenticate and get token
 			$http.post('http://localhost:3000/auth', user)
 	  		.success(function (data, status, headers, config) {
 	  			
 	  			if(data !== 'err'){
 
 	  				console.log('Data from server: ', data);
+
+	  				//We return two things from our server:
+	  				//token and user
+	  				//	-	token for authentication
 	    			$window.sessionStorage.token = data.token;
-	    			$window.sessionStorage.profile = data.user;
+
+	    			//We have to fandangle the user data returned
+	    			//a bit so we can access it via our sessionStorage
+	    			var user = {
+	    				username: data.user.username,
+	    				first_name : data.user.first_name,
+	    				last_name : data.user.last_name,
+	    				email : data.user.email,
+	    				image_url : data.user.image_url,
+	    				company_id : data.user.company_id,
+	    				role : data.user.role,
+	    				auth_role : data.user.auth_role
+	    			}
+	    			$window.sessionStorage.setItem('user', JSON.stringify(user));
+
 
 	    			//Set our rootScope variable so we an show/hide
 	    			//the correct elements

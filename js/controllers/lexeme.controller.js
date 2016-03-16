@@ -14,6 +14,8 @@ function MainCtrl($scope, $rootScope, $window){
 
 	//define variables
 	//============================================
+
+
 		//This is to determine a user is logged in
 		//Default is set to false
 		if($window.sessionStorage.token){

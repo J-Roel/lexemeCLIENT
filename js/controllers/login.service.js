@@ -36,7 +36,6 @@ function APILogin($rootScope, $http, $location, $window) {
 
 
 
-
 		//SUBMIT TO OUR API
 		submit : function (user) {
 

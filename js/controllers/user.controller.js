@@ -102,7 +102,7 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 			var id = 0; //placeholder for id
 			APIService.callAPI(action, id, data).then(function(response){
 				if(response){
-					$window.location.href = '/login';
+					$location.path('/dashboard');
 				} else {
 					console.error('Did not successfully create user.')
 				}

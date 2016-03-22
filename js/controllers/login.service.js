@@ -1,6 +1,5 @@
 'use strict';
 var app = angular.module('LexemeApp');
- 
 
 
 //--------------------------------------------------
@@ -22,7 +21,7 @@ function APILogin($rootScope, $http, $location, $window) {
 	  	//and changes the loggedIn variable to use in the
 	  	//html to show/hide elements
 	  	// - this is a helper function; not necessary, but it is the same
-	  	//used in the MainCtrl (lexeme.controller.js)
+	  	//used in the main controller.
 	  	//kept it incase we ever need to check if user is still logged in
 	    isLoggedIn : function (){
 	    	if($window.sessionStorage.token){
@@ -40,7 +39,7 @@ function APILogin($rootScope, $http, $location, $window) {
 		submit : function (user) {
 
 			//validate user input if needed
-			console.log("USER SUBMIT LOGIN: ", user);
+			
 
 			//Call our server to authenticate and get token
 			$http.post('http://localhost:3000/auth', user)
@@ -48,19 +47,21 @@ function APILogin($rootScope, $http, $location, $window) {
 	  			
 	  			if(data !== 'err'){
 
-	  				console.log('Data from server: ', data);
+	  				//console.log('Data from server: ', data);
 
-	  				//We return two things from our server:
-	  				//token and user
+	  				//We return from our server:
 	  				//	-	token for authentication
 	    			$window.sessionStorage.token = data.token;
-	    			//	-	user for ... user stuff
-	    			$window.sessionStorage.setItem('user', JSON.stringify(data.user));
-
+	    			
 
 	    			//Set our rootScope variable so we an show/hide
-	    			//the correct elements
+	    			//the correct elements based on whether the user
+	    			//is logged in or out
 	    			$rootScope.loggedIn = true;
+
+
+	    			//redirect to dashboard
+					$location.path('/dashboard');
 
 	    		} else {
 
@@ -75,7 +76,8 @@ function APILogin($rootScope, $http, $location, $window) {
 		        delete $window.sessionStorage.token;
 
 		        // Handle login errors here
-		        vm.message = 'Error: Invalid username or password';
+
+		        $rootScope.appMessage = status + " We do not recognize you. Please Register.";
 	  		});
 
 		},//END SUBMIT
@@ -86,7 +88,7 @@ function APILogin($rootScope, $http, $location, $window) {
 		//LOGOUT
 		//clear user's browser cookies
 		logout : function () {
-			console.log("User has logged out");
+
     		delete $window.sessionStorage.token;
     		delete $window.sessionStorage.user;
 

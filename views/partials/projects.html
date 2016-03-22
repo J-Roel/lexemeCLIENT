@@ -1,0 +1,26 @@
+<div class="projects-container">
+
+	<section class="row">
+		<div ng-repeat="project in PC.projects">
+			<div class="project-panel">
+				<div class="project-title-area">
+					{{ project.project_name }}
+				</div>
+
+
+				<button ng-click="showUpdateProject=true" ng-model="showUpdateProject">Edit</button>
+				
+
+				<button ng-click="PC.workOnProject( project.id );">Work Space</button>
+			</div>
+		</div>
+	</section>
+
+
+	<div ng-show="showUpdateProject">
+		<div ng-include="''"></div>
+	</div>
+
+
+
+</div>

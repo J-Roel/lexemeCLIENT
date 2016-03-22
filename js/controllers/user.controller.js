@@ -2,16 +2,23 @@
 var app = angular.module("LexemeApp");
 
 
+
+
 //---------------------------------------------------------------------------
 //Setup our app's main controller (also takes care of our home view)
 //---------------------------------------------------------------------------
-app.controller( 'UserCtrl', ['$scope', '$window', '$routeParams', '$location', 'APIService', 'APILogin', UserCtrl]);
+app.controller( 'UserCtrl', ['$scope', '$rootScope', '$window', '$routeParams', '$location', 'APIService', 'APILogin', UserCtrl]);
 
-function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin){
+
+
+
+function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIService, APILogin){
+
 
 	//vm for view model
 	var vm = this;
-	
+	vm.user;
+	vm.greeting = getGreeting();
 
 	//define variables
 	//============================================
@@ -21,12 +28,18 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 
 	//function declarations
 	//============================================
+		//Make sure user is set
+		$rootScope.curUser = vm.user;
+
 		//CRUD operations
-		vm.getUser = getUser;
-		vm.createUser = createUser;
-		vm.updateUser = updateUser;
-		vm.deleteUser = deleteUser;
-		vm.registerUser = registerUser;
+		vm.getUserT = getUserT; //Get our user by token
+		vm.deleteUser = deleteUser; //Delete our current user
+		vm.registerUser = registerUser; //Calls route to register user
+		vm.createUser = createUser; //Calls api to create new user
+		vm.editUser = editUser; //Call to edit user route
+		vm.updateUser = updateUser; //Funcion to call API and handle data
+		vm.home = home; //Helper to link back to landing page
+		vm.getGreeting = getGreeting; //gets a random greeting for user
 
 		//User Auth operations
 		vm.loginUser = loginUser;
@@ -34,9 +47,14 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 
 
 
+
+
 	//CONTROLLER INITIALIZATION FUNCTIONS
 	//============================================
-
+		//Get our user if we have one
+		if($rootScope.loggedIn){
+			vm.getUserT();
+		}
 
 
 
@@ -44,6 +62,33 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 	//CONTROLLER FUNCTIONS
 	//============================================
 		
+
+		function getGreeting(){
+			var choice = Math.floor(Math.random() * (5 - 1) + 1);
+			switch(choice){
+				case 1:
+					return 'Hey ';
+				break;
+				case 2:
+					return 'Hello ';
+				break;
+				case 3:
+					return "What's up ";
+				break;
+				case 4:
+					return "Welcome ";
+				break;
+
+				default:
+					return "Hi ";
+			}
+		}
+
+		//HOME
+		function home(){
+			$location.path("/");
+		}
+
 
 
 		//LOGIN USER
@@ -54,8 +99,11 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 			//call to our API service
 			APILogin.submit(user);
 
-			//redirect to dashboard
-			$location.path('/dashboard');
+			//Redirect is in the login service
+			//to prevent async issue with parsing
+			//the returned json.
+
+
 		}
 
 
@@ -64,6 +112,7 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 		//Function to jump to our APILogin service
 		//then redirect to the dashboard
 		function logoutUser(){
+
 
 			//call to our API service
 			APILogin.logout();
@@ -74,60 +123,21 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 
 
 
-		//GET A USER
-		function getUser(action){
-			
-			if($routeParams.id){//Make sure we have an id from our route
+		//GET A USER BY THEIR LOCAL TOKEN
+		function getUserT(){
 
-				var id = $routeParams.id; //set our id from our route
+			var id = 0; //placeholder
+			//Make call to our APIService which talks to our user
+			APIService.callAPI('getUserByToken', id).then(function(response){
+				if(response){
+					vm.user = response.data[0];
 
-				//Make call to our APIService which talks to our user
-				APIService.callAPI(action, id).then(function(response){
-					if(response){
-						vm.currentUser = response.data;
-					} else {
-						console.error('Did not recieve a user!');
-					}
-				});//End promise
-			}//End if
+				} else {
+					console.error('Did not recieve a user!');
+				}
+			});//End promise
+	
 		}//end getUser
-
-
-
-
-		//CREATE A USER
-		function createUser(action, data){
-			console.log('createUser: ', data);
-
-			var id = 0; //placeholder for id
-			APIService.callAPI(action, id, data).then(function(response){
-				if(response){
-					$location.path('/dashboard');
-				} else {
-					console.error('Did not successfully create user.')
-				}
-			})
-		}
-
-
-
-
-		//UPDATE A USER
-		function updateUser(action, id, data){
-			action = 'updateUser';
-
-			//Call the service to connect to the API
-			APIService.callAPI(action, id, data).then(function(response){
-				if(response){
-					//Response should return the user we just created, then
-					//take them to the dashboard
-					vm.currentUser = repsonse.data;
-				} else {
-					console.error('Did not successfully create user.')
-				}
-			})
-
-		}
 
 
 
@@ -147,6 +157,22 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 		}//end delete user
 
 
+
+		
+
+		//CREATE A USER
+		function createUser(action, data){
+			console.log("CREATE USER: ", data);
+
+			var id = 0; //placeholder for id
+			APIService.callAPI(action, id, data).then(function(response){
+				if(response){
+					$location.path('/login');
+				} else {
+					console.error('Did not successfully create user.')
+				}
+			})
+		}
 
 
 
@@ -181,13 +207,88 @@ function UserCtrl($scope, $window, $routeParams, $location, APIService, APILogin
 		
 		}; //END REGISTER USER
 
-	
 
+
+
+
+		//EDIT USER - call from button to lead page instead of using
+		//an anchor
+		function editUser(){
+
+			$location.path('/edit-user');
+		}
+
+
+		//UPDATE A USER
+		function updateUser(user){
+
+			console.log('UPDATE USER INFO TO PASS: ', user);
+
+			//Call the service to connect to the API
+			APIService.callAPI('updateUser', user).then(function(response){
+				if(response){
+					console.log('RESPONSE FROM UPDATE: ', response);
+					//$rootScope.appMessage = "User updated Successfully!"
+				} else {
+					console.error('Did not successfully create user.')
+				}
+			})
+
+		}
 
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 };//End Controller
+
+
+
+
+
+//EDIT USER CONTROLLER
+//-----------------------------------------------
+//This takes care of the updateUser form (edit-user.html)
+app.controller( 'EditUserCtrl', ['$scope', '$rootScope', 'APIService', EditUserCtrl]);
+
+function EditUserCtrl($scope, $rootScope, APIService){
+
+	//vm for view model
+	var vm = this;
+	vm.updateCurUser = {}; //Object for our form
+	//define variables
+	//============================================
+
+			var id = 0; //placeholder
+			//Make call to our APIService which talks to our user
+			APIService.callAPI('getUserByToken', id).then(function(response){
+				if(response){
+					vm.user = response.data[0];
+
+					vm.updateCurUser.username = vm.user.username;
+					vm.updateCurUser.firstname = vm.user.first_name;
+					vm.updateCurUser.lastname = vm.user.last_name;
+					vm.updateCurUser.imageurl = vm.user.image_url;
+					vm.updateCurUser.email = vm.user.email;
+					vm.updateCurUser.role = vm.user.role;
+
+
+				} else {
+					console.error('Did not recieve a user!');
+				}
+			});//End promise
+		
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

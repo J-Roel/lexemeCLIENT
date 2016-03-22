@@ -25,7 +25,8 @@ function MainCtrl($scope, $rootScope, $window){
     		$rootScope.loggedIn = false;
     		return false;
     	}
-
+    	
+    	$rootScope.appMessage = "";
 	
 };//End Controller
 

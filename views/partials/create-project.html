@@ -1,0 +1,23 @@
+<!-- New project Form -->
+<section class="container row">
+	
+	<div class="one-third">
+
+		
+	<form name="projectForm" ng-submit="PC.createProject(project)" novalidate>
+
+		<div class="form-group" ng-class="{ 'has-error' : projectForm.projectname.$invalid && !projectForm.projectname.$pristine ,'has-success' : projectForm.projectname.$valid }">
+		    <label class="control-label" for="projectname">projectname:</label>
+		    <input autofocus type="text" name="projectname" class="form-control" ng-model="project.projectname" ng-required="true" id="projectname" ng-minlength="3" ng-maxlength="12" >
+		    <p ng-show="projectForm.projectname.$error.minlength" class="help-block">projectname is too short.</p>
+		    <p ng-show="projectForm.projectname.$error.maxlength" class="help-block">projectname is too long.</p>
+		</div>
+
+		<button type="submit" class="btn btn-primary" ng-disabled="projectForm.$invalid">Submit</button>
+	</form>
+		
+
+		
+		
+	</div>
+</section>

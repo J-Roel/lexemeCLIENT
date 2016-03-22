@@ -1,26 +1,30 @@
-<div ng-include src="'../views/partials/header.html'"></div>
+<section class="container row">
+	<div ng-include src="'../views/partials/header'"></div>
+</section>
+
+<div class="container row">
+<section class="one-fourth no-p-m" ng-controller="DashboardCtrl as DashC">
+		<div ng-include src="'../views/partials/sidebar'"></div>
+</section>
+<section class="three-fourth no-p-m">
+	<div ng-include src="'../views/partials/topbar'"></div>
+	
+		<div class="group-container">
+			<div ng-include src="DashC.getPartialUrl();"></div>
+		</div>
+
+
+	</div>
+</section>
+</div>
 
 
 
 
-
-
-
-<pre>{{ DCtrl.user }}</pre>
-
+<div ng-include src="'../views/partials/footer'"></div>
 
 
 
 
+req["passport"].user
 
-
-
-
-
-
-
-
-
-
-
-<div ng-include src="'../views/partials/footer.html'"></div>

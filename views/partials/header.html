@@ -1,29 +1,35 @@
 <header>
-       <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <ul>
-                  <div class="col-md-4">
-                        <div class="navbar-brand">Cap-stone</div>
-                  </div>
-                  <div class="col-md-8 text-right">
-                        <div class="navbar-header navbar-right">
-                          <div class="navbar-brand"><a href="#/">Home</a></div>
-                              
-                              <div class="navbar-brand" ng-show="!loggedIn">
-                                      <a href="#/login">Login</a>
-                              </div>
-                              <div class="navbar-brand" ng-show="!loggedIn">
-                                  <a href="#/register">Register</a>
-                              </div>
-                              <div class="navbar-brand" ng-show="loggedIn">
-                                      <a href="#/dashboard">Dashboard</a>
-                              </div>
-                              <div class="navbar-brand" ng-show="loggedIn">
-                                  <a ng-click="UC.logoutUser()">Logout</a>
-                              </div>
-                        </div>
-                  </div>
-                  </ul>
-            </div>
-      </nav>
+    <nav>
+
+        <div class="one-fourth">
+            <ul>
+              <li class="title"><a href="#/">Lexeme</a></li>
+            </ul>
+        </div>
+
+        <div class="three-fourth">
+            <ul>
+              <li ng-show="!loggedIn"><a href="#/login">LOGIN</a></li>
+                  <li ng-show="!loggedIn"><a href="#/register">REGISTER</a>
+                  </li>
+
+                  <li ng-show="loggedIn">
+                  <span class="fa fa-home fa-2x orange inset-item" ng-click="UC.home();"></span>
+                  </li>
+
+                  <li ng-show="loggedIn" ng-init="showSettings=false">
+                  <span class="fa fa-cog fa-2x orange inset-item" ng-click="showSettings=!showSettings"></span>
+                  </li>
+
+                  <div ng-show="showSettings">
+                    <li ng-show="loggedIn"><a href="#/dashboard">DASHBOARD</a>
+                    </li>
+                    <li ng-show="loggedIn"><a ng-click="UC.logoutUser()">LOGOUT</a>
+                    </li>
+                  </div>      
+            </ul>
+        </div>
+        
+    </nav>
 </header>
+<div ng-show="appMessage" class="app-message"></div>

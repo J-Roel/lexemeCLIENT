@@ -10,13 +10,16 @@ app.config(function($routeProvider) {
       })
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl as DCtrl'    
+        controller: 'ProjectCtrl as PC'    
       })
       .when('/user-profile/:id', {
       	templateUrl: 'views/user-profile.html',
-      	//controller: "UserCtrl as UC",
       })
       .when('/register', {
       	templateUrl: 'views/register.html'
+      })
+      .when('/edit-user', {
+        templateUrl: 'views/edit-user.html',
+        //controller: 'EditUserCtrl as EUC'
       })
 });

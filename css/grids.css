@@ -1,0 +1,99 @@
+
+/*
+	GRIDS.CSS
+	- grids contains both responsive and fixed 980 grid systems
+		- prepend "fixed-" before the class name to make it fixed
+	- TODO: add media queries
+
+/* ------------------------------------------------ */
+/*		Structure Basics							*/
+/* ------------------------------------------------ */
+
+/* -- Column Row (aka Clearfix) -- */ 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* ------------------------------------------------ */
+/*		RESPONSIVE									*/
+/* ------------------------------------------------ */
+
+.container {
+  width: 100%;
+  margin: auto;
+}
+
+/* -------- COLUMN LAYOUTS -------*/
+/* -- Column Sizes -- */
+ 
+/*.one-fourth   { width:21.25%;}*/
+.one-fourth   { width:24.25%;}
+.one-third    { width:29.333%; }
+.one-half     { width:45.5%; }
+.two-third    { width:61.666%; }
+/*.three-fourth { width:69.75%;}*/
+.three-fourth { width:75.75%;}
+.one-column   { width:94%; }
+.full-column  { width:100%; }
+ 
+/* -- Column Margin & Float-- */
+.one-half,.one-third,.two-third,
+.three-fourth,.one-fourth,.one-column,
+.full-column {
+  /*margin-left:3%; */
+  /*margin-top:1%;*/
+  float:left;
+}
+ 
+
+
+
+/* ------------------------------------------------ */
+/*		Fixed										*/
+/* ------------------------------------------------ */
+
+.fixed-container {
+  width: 980px;
+  margin: auto;
+}
+
+
+/* ----- =columns ----- */
+.fixed-one-half {
+	width: 460px;
+}
+.fixed-one-third {
+	width: 300px;
+}
+.fixed-two-third {
+	width: 620px;
+}
+.fixed-one-fourth {
+	width: 220px;
+}
+.fixed-three-fourth {
+	width: 700px;
+}
+.fixed-full-column {
+	width: 940px;
+}
+
+.fixed-one-half,
+.fixed-one-third,
+.fixed-two-third,
+.fixed-one-fourth,
+.fixed-three-fourth,
+.fixed-full-column {
+	float: left;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+
+
+/* ------------------------------------------------ */
+/*		Media Queries								*/
+/* ------------------------------------------------ */

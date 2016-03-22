@@ -1,26 +1,4 @@
-
-<header>
-       <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <ul>
-                  <div class="col-md-4">
-                        <div class="navbar-brand">Cap-stone</div>
-                  </div>
-                  <div class="col-md-8 text-right">
-                        <div class="navbar-header navbar-right">
-                              <div class="navbar-brand">
-                              	<a href="#/">Home</a>
-                              </div>
-                              <div class="navbar-brand">
-                              <a href="#/create-user">Register</a>
-                              </div>
-                        </div>
-                  </div>
-                  </ul>
-            </div>
-      </nav>
-</header>
-
+<div ng-include src="'../views/partials/header.html'"></div>
 
 <!-- New User Form -->
 <section class="container panel-info">
@@ -29,12 +7,15 @@
 		
 		<form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
 
-		<div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine ,'has-success' : userForm.username.$valid }">
 		    <label class="control-label" for="username">Username:</label>
-		    <input autofocus type="text" name="username" class="form-control" ng-model="user.username" ng-required="true" id="username" ng-minlength="3" ng-maxlength="12" >
-		    <p ng-show="userForm.username.$error.minlength" class="help-block">username is too short.</p>
-		    <p ng-show="userForm.username.$error.maxlength" class="help-block">username is too long.</p>
-		</div>
+		    <input autofocus 
+		    type="text" 
+		    name="username" 
+		    class="form-control" 
+		    ng-required="true" 
+		    id="username" 
+		    ng-minlength="3" ng-maxlength="12" >
+		 
 
 		<div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine ,'has-success' : userForm.password.$valid }">
 		    <label class="control-label" for="password">Password</label>
@@ -61,3 +42,5 @@
 		
 	</div>
 </section>
+
+<div ng-include src="'../views/partials/header.html'"></div>

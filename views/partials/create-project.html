@@ -1,23 +1,34 @@
-<!-- New project Form -->
+<div id="projects" ng-click="DashC.selectIt($event)">
+<i class="fa fa-chevron-circle-left fa-2x inset-item"></i>
+</div>
+
 <section class="container row">
-	
-	<div class="one-third">
 
 		
 	<form name="projectForm" ng-submit="PC.createProject(project)" novalidate>
 
+	<div class="project-text"> Create A New Project</div>
+	<hr/>
+
 		<div class="form-group" ng-class="{ 'has-error' : projectForm.projectname.$invalid && !projectForm.projectname.$pristine ,'has-success' : projectForm.projectname.$valid }">
-		    <label class="control-label" for="projectname">projectname:</label>
-		    <input autofocus type="text" name="projectname" class="form-control" ng-model="project.projectname" ng-required="true" id="projectname" ng-minlength="3" ng-maxlength="12" >
+		    <label class="control-label" for="projectname">Project Name:</label>
+		    <input autofocus type="text" name="projectname" class="form-control" ng-model="project.projectname" ng-required="true" id="projectname" ng-minlength="3" ng-maxlength="40" >
 		    <p ng-show="projectForm.projectname.$error.minlength" class="help-block">projectname is too short.</p>
 		    <p ng-show="projectForm.projectname.$error.maxlength" class="help-block">projectname is too long.</p>
 		</div>
 
-		<button type="submit" class="btn btn-primary" ng-disabled="projectForm.$invalid">Submit</button>
+		<div class="form-group" ng-class="{ 'has-error' : projectForm.projectimg.$invalid && !projectForm.projectimg.$pristine ,'has-success' : projectForm.projectimg.$valid }">
+		    <label class="control-label" for="projectimg">Project Image:</label>
+		    <input autofocus type="text" name="projectimg" class="form-control" ng-model="project.projectimg" id="projectimg" ng-minlength="3" ng-maxlength="255" >
+		    <p ng-show="projectForm.projectimg.$error.minlength" class="help-block">projectimg is too short.</p>
+		    <p ng-show="projectForm.projectimg.$error.maxlength" class="help-block">projectimg is too long.</p>
+		</div>
+		 
+
+		<hr/>
+
+		<button type="submit" class="btn btn-primary" ng-disabled="projectForm.$invalid">Create</button>
 	</form>
 		
 
-		
-		
-	</div>
 </section>

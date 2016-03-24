@@ -1,0 +1,17 @@
+.hide-remove {
+    transition: opacity 1s;
+    opacity: 0;
+}
+.hide-remove-active {
+    opacity: 1;
+}
+
+//the final state
+.hide {
+    display: none;
+}
+//the animation
+.hide-add-start {
+    transition: opacity 1s;
+    opacity: 0;
+}

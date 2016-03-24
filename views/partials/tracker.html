@@ -1,0 +1,49 @@
+<div ng-controller="TrackerCtrl as TC">
+
+    <!-- MENU -->
+    <section class="container row">
+         <nav>
+            <div class="one-fourth">
+                <ul>
+                  <li>Tracker</li>
+                </ul>
+            </div>
+            <div class="three-fourth">
+                <ul class="float-right">
+                    <!-- Individual Buttons -->
+                        <input type="text" ng-model="newName" placeholder="Create New List">
+                        <button class="btn btn-info" ng-click="TC.addList(newName); newName='';">Create</button>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <hr/>
+
+    <!-- LISTS -->
+    <div ng-repeat='item in TC.list'>
+        
+        <div class="tracker-list panel-fill">
+            <div class="row">
+            <div class="project-text"> {{ item.name }} </div>
+            <div class="float-right"> {{ item.date | date : shortTime : 'UTC' }} </div>
+            </div>
+            <hr/>
+        
+            <div ng-repeat="task in item.task track by $index">
+                <i class="fa fa-times inset-item tracker-icon" ng-click="TC.removeTask(item.id, $index)"></i> {{task}}
+            </div>
+        
+            <div class="row">
+                <input class="form-control stretch" type="text" ng-model="task" placeholder="Add a task">
+                <button class="btn btn-primary" ng-click="TC.addTask(item.id, task); task='';">+</button>
+            </div>
+            <button class="btn btn-warning" ng-click="TC.removeList(item.id)">Remove List</button>
+        </div>
+    </div>
+
+
+
+
+
+
+</div>

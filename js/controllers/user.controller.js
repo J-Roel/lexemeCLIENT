@@ -51,9 +51,12 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 
 	//CONTROLLER INITIALIZATION FUNCTIONS
 	//============================================
-		//Get our user if we have one
-		if($rootScope.loggedIn){
+		//Get our user info if we have one
+		//if not re-route to login page
+		if($window.sessionStorage.token){
 			vm.getUserT();
+		}else{
+			$location.path('/login');
 		}
 
 
@@ -165,7 +168,7 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 			console.log("CREATE USER: ", data);
 
 			var id = 0; //placeholder for id
-			APIService.callAPI(action, id, data).then(function(response){
+			APIService.callAPI(action, data).then(function(response){
 				if(response){
 					$location.path('/login');
 				} else {
@@ -194,7 +197,7 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 		            first_name: user.firstname,
 		            last_name: user.lastname,
 		            email: user.email,
-		            image_url: 'http://www.jeremyroelfs.com/blog/wp-content/uploads/2015/11/bkgrnd-e1458087482501.png',
+		            image_url: 'http://fillmurray.com/100/100',
 		            company_id: 0,
 		            role: user.role,
 		            auth_role: 'visitor'

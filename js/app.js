@@ -1,5 +1,5 @@
 'use strict';
 
 //Initialize our app
-angular.module("LexemeApp", ['ngRoute'] );
+angular.module("LexemeApp", ['ngRoute', 'ngAnimate'] );
 

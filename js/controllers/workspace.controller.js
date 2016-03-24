@@ -2,9 +2,9 @@
 var app = angular.module("LexemeApp");
 
 //Setup our app's main controller (also takes care of our home view) -------------------------
-app.controller( 'DashboardCtrl', ['$scope', DashboardCtrl]);
+app.controller( 'WorkspaceCtrl', ['$scope', '$routeParams', WorkspaceCtrl]);
 
-function DashboardCtrl($scope){
+function WorkspaceCtrl($scope, $routeParams){
 
 
 	//vm for "this" view model

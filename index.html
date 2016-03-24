@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" type="text/css" href="/css/grids.css">
+	<link rel="stylesheet" type="text/css" href="/css/forms.css">
+	<link rel="stylesheet" type="text/css" href="/css/tracker.css">
 	<link rel="stylesheet" type="text/css" href="/css/animations.css">
 	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
@@ -19,9 +21,11 @@
 
 	<!-- ANGULAR CONTROLLERS -->
 	<div ng-controller="MainCtrl as MC">
-		<div ng-controller="UserCtrl as UC">
-			<div ng-view></div>
-		</div>
+		
+			<div ng-controller="UserCtrl as UC">
+				<div ng-view></div>
+			</div>
+		
 	</div>
 
 
@@ -48,9 +52,11 @@
 	<script type="text/javascript" src="/js/controllers/project.controller.js"></script>
 	<script type="text/javascript" src="/js/controllers/dashboard.controller.js"></script>
 	<script type="text/javascript" src="/js/routes.js"></script>
+	<script type="text/javascript" src="/js/controllers/animation.controller.js"></script>
 
 	<!-- DIRECTIVES -->
 	<script type="text/javascript" src="/js/directives/carousel.directive.js"></script>
+	<script type="text/javascript" src="/js/controllers/tracker.controller.js"></script>
 
 
 

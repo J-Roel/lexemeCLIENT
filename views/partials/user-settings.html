@@ -1,13 +1,27 @@
-<div ng-include src="'../views/partials/header.html'"></div>
+<section class="container row">
+     <nav>
+        <div class="one-half">
+            <ul>
+              <li>Edit your settings</li>
+            </ul>
+        </div>
+        <div class="three-fourth">
+            <ul class="float-right">
+                <!-- Individual Buttons -->
+            </ul>
+        </div>
+    </nav>
+</section>
+<hr/>
+
 
 
 <div ng-controller="EditUserCtrl as EUC">
+<section class="container row">
 
-<div ng-show="error" class="alert alert-danger">{{error}}</div>
-<div class="container row">
-
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
+    
     <form name="updateUser" ng-submit="UC.updateUser(EUC.updateCurUser)" role="form">
-        
 
         <div class="form-group">
             <label for="username">Username</label>
@@ -52,11 +66,12 @@
             <input type="text" name="role" id="role" class="form-control" ng-model="EUC.updateCurUser.role" />
             <span ng-show="updateUser.role.$dirty && updateUser.role.$error.required" class="help-block">Company Role is required</span>
         </div>
+        <hr/>
 
         <div class="form-actions">
-            <button type="submit" ng-disabled="updateUser.$invalid || dataLoading" class="btn btn-danger">Update</button>
+            <button type="submit" ng-disabled="updateUser.$invalid || dataLoading" class="btn btn-primary">Update</button>
         </div>
     </form>
 
+</section>
 </div>
-<div ng-include src="'../views/partials/footer.html'"></div>

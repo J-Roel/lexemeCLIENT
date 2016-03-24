@@ -12,7 +12,8 @@
 
 
 	<div id="sidebar-menu">
-		<div id="notifications" class="menu-item menu-item-selected" ng-click="DashC.selectIt($event)">
+		<div id="notifications" class="menu-item menu-item-selected" 
+		ng-click="DashC.selectIt($event); showProjectChoices=false;">
 			<div class="menu-icon">
 				<i class="fa fa-bell fa-2x inset-item"></i>
 			</div>
@@ -21,7 +22,10 @@
 			</div>
 			<div class="menu-selected"></div>
 		</div>
-		<div id="projects" class="menu-item" ng-click="DashC.selectIt($event)">
+
+
+		<!-- PROJECTS -->
+		<div id="projects" ng-model="showProjectChoices" class="menu-item" ng-click="DashC.selectIt($event); showProjectChoices=true;">
 			<div class="menu-icon">
 				<i class="fa fa-pencil fa-2x inset-item"></i>
 			</div>
@@ -29,7 +33,10 @@
 				<h4>Projects</h4>
 			</div>
 		</div>
-		<div id="tracker" class="menu-item" ng-click="DashC.selectIt($event)">
+
+		
+		<div id="tracker" class="menu-item" 
+		ng-click="DashC.selectIt($event); showProjectChoices=false;">
 			<div class="menu-icon">
 				<i class="fa fa-check-square-o fa-2x inset-item"></i>
 			</div>
@@ -37,7 +44,8 @@
 				<h4>Tracker</h4>
 			</div>
 		</div>
-		<div id="companies" class="menu-item" ng-click="DashC.selectIt($event)">
+		<div id="companies" class="menu-item" 
+		ng-click="DashC.selectIt($event); showProjectChoices=false;">
 			<div class="menu-icon">
 				<i class="fa fa-users fa-2x inset-item"></i>
 			</div>
@@ -45,7 +53,8 @@
 				<h4>Companies</h4>
 			</div>
 		</div>
-		<div id="User Settings" class="menu-item" ng-click="DashC.selectIt($event)">
+		<div id="user-settings" class="menu-item" 
+		ng-click="DashC.selectIt($event); showProjectChoices=false;">
 			<div class="menu-icon">
 				<i class="fa fa-cogs fa-2x inset-item"></i>
 			</div>
@@ -54,5 +63,6 @@
 			</div>
 		</div>
 	</div>
+
 
 </section>

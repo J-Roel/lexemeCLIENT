@@ -3,17 +3,16 @@ var app = angular.module('LexemeApp');
 app.config(function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/home.html',
+        templateUrl: 'views/home.html'
       })
       .when('/login', {
         templateUrl: 'views/login.html'
       })
       .when('/dashboard', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'ProjectCtrl as PC'    
+        templateUrl: 'views/dashboard.html'
       })
-      .when('/user-profile/:id', {
-      	templateUrl: 'views/user-profile.html',
+      .when('/projects/:id', {
+      	templateUrl: 'views/workspace.html'
       })
       .when('/register', {
       	templateUrl: 'views/register.html'

@@ -15,7 +15,6 @@ function APIService($http){
 			//Setup switch to take care of all the routes to the serverside
 			//this will update our call info 
 			setCall : function(action){
-				//console.log("Switch: ", action, id);
 				switch(action)
 				{
 
@@ -46,7 +45,7 @@ function APIService($http){
 
 					case 'deleteUser' :
 						this.callinfo.method = 'DELETE';
-						this.callinfo.url = this.rootUrl + "users/";
+						this.callinfo.url = this.rootUrl + "users";
 					break;
 
 					case 'updateUser' :
@@ -70,7 +69,17 @@ function APIService($http){
 					break;
 
 
+					//MESSAGE CRUD TO API
+					//========================================================
+					case 'insertNote' :
+						this.callinfo.method = 'POST';
+						this.callinfo.url = this.rootUrl + "projects/notes";
+					break;
 
+					case 'getProjectNotes' :
+						this.callinfo.method = 'GET';
+						this.callinfo.url = this.rootUrl + "projects/notes";
+					break;
 
 
 					default: //if there is no matching action return false
@@ -83,6 +92,7 @@ function APIService($http){
 
 
 			callAPI : function(action, data){
+				//console.log('IN API CALL: ', data);
 				//setup our api call and return true if successful
 				var goAhead = this.setCall(action);
 
@@ -93,8 +103,9 @@ function APIService($http){
 						//console.log("We have NO data: ", data);
 						return $http(this.callinfo);
 					} else { //if we have data, then we pass our data
-						//console.log("We have data: ", data);
+						console.log("We have data: ", data);
 						this.callinfo.data = data;
+						console.log(this.callinfo);
 						return $http(this.callinfo);
 					}
 				}

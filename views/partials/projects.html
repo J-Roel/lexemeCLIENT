@@ -1,26 +1,52 @@
-<div class="projects-container">
+<section class="container row">
+	 <nav>
+        <div class="one-fourth">
+            <ul>
+              <li>Projects</li>
+            </ul>
+        </div>
+        <div class="three-fourth">
+            <ul class="float-right"><li id="create-project" class="btn btn-info" ng-click="DashC.selectIt($event)">
+				<i class="fa fa-plus-square inset-item"></i> Create New Project
+				</li>
+				
+			</ul>
+		</div>
+	</nav>
+</section>
+<hr/>
 
-	<section class="row">
+
+{{ PC.projects }}
+	
+		
+		<!-- ng-repeat show projects -->
 		<div ng-repeat="project in PC.projects">
-			<div class="project-panel">
-				<div class="project-title-area">
-					{{ project.project_name }}
+			
+			<a href="/projects/{{ project.id }}">
+				
+				<div class="project-panel">
+					
+					<div class="project-img">
+						
+						<img src="{{ project.image_url }}">
+					
+					</div>
+					
+					<div class="project-title-area project-text">
+						{{ project.project_name }}
+					</div>
+					<hr/>
+					
+
 				</div>
 
+			</a>
 
-				<button ng-click="showUpdateProject=true" ng-model="showUpdateProject">Edit</button>
-				
-
-				<button ng-click="PC.workOnProject( project.id );">Work Space</button>
-			</div>
 		</div>
-	</section>
-
-
-	<div ng-show="showUpdateProject">
-		<div ng-include="''"></div>
-	</div>
+}
+}
 
 
 
-</div>
+

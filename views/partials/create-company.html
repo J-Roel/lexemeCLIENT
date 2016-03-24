@@ -1,0 +1,35 @@
+<div id="companies" ng-click="DashC.selectIt($event)">
+<i class="fa fa-chevron-circle-left fa-2x inset-item"></i>
+</div>
+
+<!-- New project Form -->
+<section class="container row">
+
+		
+	<form name="companyForm" ng-submit="PC.createCompany(company)" novalidate>
+
+	<div class="project-text"> Create A New Company</div>
+	<hr/>
+
+		<div class="form-group" ng-class="{ 'has-error' : companyForm.companyname.$invalid && !companyForm.companyname.$pristine ,'has-success' : companyForm.companyname.$valid }">
+		    <label class="control-label" for="companyname">Company Name:</label>
+		    <input autofocus type="text" name="companyname" class="form-control" ng-model="project.companyname" ng-required="true" id="companyname" ng-minlength="3" ng-maxlength="40" >
+		    <p ng-show="companyForm.companyname.$error.minlength" class="help-block">projectname is too short.</p>
+		    <p ng-show="companyForm.companyname.$error.maxlength" class="help-block">projectname is too long.</p>
+		</div>
+
+		<div class="form-group" ng-class="{ 'has-error' : companyForm.companyimage.$invalid && !companyForm.companyimage.$pristine ,'has-success' : companyForm.companyimage.$valid }">
+		    <label class="control-label" for="companyimage">Company Image (300x150):</label>
+		    <input autofocus type="text" name="companyimage" class="form-control" ng-model="project.companyimage" ng-required="true" id="companyimage" ng-minlength="3" ng-maxlength="255" >
+		    <p ng-show="companyForm.companyimage.$error.minlength" class="help-block">projectname is too short.</p>
+		    <p ng-show="companyForm.companyimage.$error.maxlength" class="help-block">projectname is too long.</p>
+		</div>
+		 
+
+		<hr/>
+
+		<button type="submit" class="btn btn-primary" ng-disabled="projectForm.$invalid">Create</button>
+	</form>
+		
+
+</section>

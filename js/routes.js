@@ -11,7 +11,7 @@ app.config(function($routeProvider) {
       .when('/dashboard', {
         templateUrl: 'views/dashboard.html'
       })
-      .when('/projects/:id', {
+      .when('/workspace', {
       	templateUrl: 'views/workspace.html'
       })
       .when('/register', {

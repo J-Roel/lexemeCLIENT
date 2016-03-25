@@ -2,27 +2,37 @@
 	<div ng-include src="'../views/partials/header'"></div>
 </section>
 
+<!-- Get all scopes to workspace -->
+<div ng-controller="UserCtrl as UC">
+<div ng-controller="ProjectCtrl as PC">
+<div ng-controller="WorkspaceCtrl as Work">
 
 
 
-<div class="container row" ng-controller="DashboardCtrl as DashC">
-		<section class="one-fourth no-p-m">
-				<div ng-include src="'../views/partials/sidebar'"></div>
+	<!-- MENU ITEMS -->
+	<div class="container row">
+		<button ng-click="Work.check();">Check</button>
+		<i class="fa fa-mouse-pointer fa-2x icon" 
+			ng-click="state='pointer'"></i>
+		<i class="fa fa-square inset fa-2x icon" 
+			ng-click="state='box'" ce-box-creator="25,25"></i>
+			<!-- ce-box-creator="25,25" -->
+		<i class="fa fa-picture-o fa-2x icon"
+			ng-click="state='image'"></i>
+	</div>
+
+
+
+	<div class="container row one-column">
+		<!-- DESKTOP DIRECTIVE -->
+		<section class="desktop-container">
+			<div class="full-column">
+			<desktop></desktop>
 		</section>
-		<section class="three-fourth no-p-m">
-			<div ng-include src="'../views/partials/topbar'"></div>
-			
-				<div class="group-container" ng-controller="ProjectCtrl as PC">
-					<div ng-include src="DashC.getPartialUrl()"></div>
-				</div>
+	</div>
 
 
-			</div>
-		</section>
+
 </div>
-
-
-
-
-<div ng-include src="'../views/partials/footer'"></div>
-
+</div>
+</div>

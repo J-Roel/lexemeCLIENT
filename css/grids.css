@@ -29,6 +29,7 @@
 /* -------- COLUMN LAYOUTS -------*/
 /* -- Column Sizes -- */
  
+.one-eighth { width: 10.125%; }
 /*.one-fourth   { width:21.25%;}*/
 .one-fourth   { width:20.25%;}
 .one-third    { width:29.333%; }

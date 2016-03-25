@@ -165,7 +165,7 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 
 		//CREATE A USER
 		function createUser(action, data){
-			console.log("CREATE USER: ", data);
+			//console.log("CREATE USER: ", data);
 
 			var id = 0; //placeholder for id
 			APIService.callAPI(action, data).then(function(response){
@@ -183,7 +183,7 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 		//REGISTER A USER
 		function registerUser(user){
 
-			console.log("USER: ", user);
+			//console.log("USER: ", user);
 			//Extra Validation can be added here
 			
 
@@ -202,7 +202,7 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 		            role: user.role,
 		            auth_role: 'visitor'
 	 	    	}
-	 	    	console.log("NEW USER DATA: ", newUserData);
+	 	    	//console.log("NEW USER DATA: ", newUserData);
 
 
 			//Create Our User
@@ -225,12 +225,12 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 		//UPDATE A USER
 		function updateUser(user){
 
-			console.log('UPDATE USER INFO TO PASS: ', user);
+			//console.log('UPDATE USER INFO TO PASS: ', user);
 
 			//Call the service to connect to the API
 			APIService.callAPI('updateUser', user).then(function(response){
 				if(response){
-					console.log('RESPONSE FROM UPDATE: ', response);
+					//console.log('RESPONSE FROM UPDATE: ', response);
 					//$rootScope.appMessage = "User updated Successfully!"
 				} else {
 					console.error('Did not successfully create user.')

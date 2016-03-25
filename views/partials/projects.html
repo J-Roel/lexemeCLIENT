@@ -6,7 +6,8 @@
             </ul>
         </div>
         <div class="three-fourth">
-            <ul class="float-right"><li id="create-project" class="btn btn-info" ng-click="DashC.selectIt($event)">
+            <ul class="float-right">
+            	<li id="create-project" class="btn btn-info" ng-click="DashC.selectIt($event)">
 				<i class="fa fa-plus-square inset-item"></i> Create New Project
 				</li>
 				
@@ -16,16 +17,14 @@
 </section>
 <hr/>
 
-
-{{ PC.projects }}
 	
 		
 		<!-- ng-repeat show projects -->
 		<div ng-repeat="project in PC.projects">
 			
-			<a href="/projects/{{ project.id }}">
+			<a href="/#/workspace">
 				
-				<div class="project-panel">
+				<div class="project-panel panel-fill">
 					
 					<div class="project-img">
 						
@@ -44,8 +43,6 @@
 			</a>
 
 		</div>
-}
-}
 
 
 

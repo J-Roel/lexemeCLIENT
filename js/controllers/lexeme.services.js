@@ -69,14 +69,28 @@ function APIService($http){
 					break;
 
 
-					//MESSAGE CRUD TO API
+					//NOTES
 					//========================================================
-					case 'insertNote' :
+					case 'saveNotes' :
 						this.callinfo.method = 'POST';
 						this.callinfo.url = this.rootUrl + "projects/notes";
 					break;
 
 					case 'getProjectNotes' :
+						this.callinfo.method = 'GET';
+						this.callinfo.url = this.rootUrl + "projects/notes";
+					break;
+
+
+
+					//TRACKER
+					//========================================================
+					case 'createTracker' :
+						this.callinfo.method = 'POST';
+						this.callinfo.url = this.rootUrl + "tracker/";
+					break;
+
+					case 'getTrackerList' :
 						this.callinfo.method = 'GET';
 						this.callinfo.url = this.rootUrl + "projects/notes";
 					break;
@@ -103,9 +117,9 @@ function APIService($http){
 						//console.log("We have NO data: ", data);
 						return $http(this.callinfo);
 					} else { //if we have data, then we pass our data
-						console.log("We have data: ", data);
+						//console.log("We have data: ", data);
 						this.callinfo.data = data;
-						console.log(this.callinfo);
+						//console.log("SENDING NOW: ", this.callinfo);
 						return $http(this.callinfo);
 					}
 				}

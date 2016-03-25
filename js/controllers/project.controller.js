@@ -57,7 +57,7 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 				}
 			}
 			
-			console.log(vm.curProject);
+			//console.log(vm.curProject);
 		}
 
 
@@ -72,7 +72,7 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 					//console.log('RESPONSE FROM USER PROJECTS: ', response)
 					vm.projects = response.data;
 
-					console.log("response: ", response.data);
+					//console.log("response: ", response.data);
 					//Gather all our project ids to get comments
 					var projectIds = [];
 
@@ -93,7 +93,7 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 						APIService.callAPI('getProjectNotes', newData)
 						.then(function(response){
 							if(response){
-								console.log("Response from messages: ", response);
+								//console.log("Response from messages: ", response);
 							} else {
 								console.error('Did not recieve project messages');
 							}
@@ -174,7 +174,7 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 
 		//UPDATE A PROJECT
 		function updateProject(id, data){
-			console.log('ID: ', id, ' data: ', data);
+			//console.log('ID: ', id, ' data: ', data);
 
 
 

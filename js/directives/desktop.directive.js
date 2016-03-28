@@ -54,12 +54,12 @@ app.directive('desktop', function() {
           
 
 
-        element.on('click', function() {
+        // element.on('click', function() {
             
-            console.log(scope.state, element);
+        //     console.log(scope.state, element);
 
 
-        });
+        // });
 
 
 

@@ -7,31 +7,46 @@
 <div ng-controller="ProjectCtrl as PC">
 <div ng-controller="WorkspaceCtrl as Work">
 
-
-
+	<!-- MENU -->
 	<!-- MENU ITEMS -->
-	<div class="container row">
-		<button ng-click="Work.check();">Check</button>
-		<i class="fa fa-mouse-pointer fa-2x icon" 
-			ng-click="state='pointer'"></i>
-		<i class="fa fa-square inset fa-2x icon" 
-			ng-click="state='box'" ce-box-creator="25,25"></i>
-			<!-- ce-box-creator="25,25" -->
-		<i class="fa fa-picture-o fa-2x icon"
-			ng-click="state='image'"></i>
+	<section class="container row">
+	 <nav>
+        <div class="two-third">
+
+            <ul>
+        		<!-- Default - does nothing -->
+        		<li>{{ PC.projects[0].project_name }}</li>
+            </ul>
+
+        </div>
+        <div class="one-third">
+        	<!-- //Add a box to the scene -->
+            <ul class="float-right">
+            	<li><jr-make-box-button></jr-make-box-button></li>
+			</ul>
+		</div>
+	</nav>
+	</section>
+
+	
+	<!-- DESKTOP -->
+	<div class="desktop-container row" id="desktop" jr-track-mouse>
+		<!-- WORK AREA -->
+		
 	</div>
-
-
-
-	<div class="container row one-column">
-		<!-- DESKTOP DIRECTIVE -->
-		<section class="desktop-container">
-			<div class="full-column">
-			<desktop></desktop>
-		</section>
-	</div>
-
-
+	<nav>
+        <div class="two-third">
+            <ul>
+                <!-- //Get code from #desktop -->
+                <li><button ng-click="Work.check();">Check</button></li>
+            </ul>
+        </div>
+        <div class="one-third">
+        	<ul class="float-right">
+            	<li>{{ myX }}, {{ myY }}</li>
+			</ul>
+		</div>
+	
 
 </div>
 </div>

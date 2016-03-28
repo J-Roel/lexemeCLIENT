@@ -23,7 +23,7 @@ function DashboardCtrl($scope){
 	//FUNCTION DECLARATIONS
 	//============================================
 		vm.selectIt = selectIt;
-		vm.partialId = "notifications";
+		vm.partialId = "projects";//default partial to load in dashboard
 		vm.getPartialUrl = getPartialUrl;
 
 

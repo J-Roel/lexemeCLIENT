@@ -12,7 +12,7 @@
 
 
 	<div id="sidebar-menu">
-		<div id="notifications" class="menu-item menu-item-selected" 
+		<!-- <div id="notifications" class="menu-item menu-item-selected" 
 		ng-click="DashC.selectIt($event); showProjectChoices=false;">
 			<div class="menu-icon">
 				<i class="fa fa-bell fa-2x inset-item"></i>
@@ -21,11 +21,11 @@
 				<h4>Notifications</h4>
 			</div>
 			<div class="menu-selected"></div>
-		</div>
+		</div> -->
 
 
 		<!-- PROJECTS -->
-		<div id="projects" ng-model="showProjectChoices" class="menu-item" ng-click="DashC.selectIt($event); showProjectChoices=true;">
+		<div id="projects" ng-model="showProjectChoices" class="menu-item menu-item-selected" ng-click="DashC.selectIt($event); showProjectChoices=true;">
 			<div class="menu-icon">
 				<i class="fa fa-pencil fa-2x inset-item"></i>
 			</div>

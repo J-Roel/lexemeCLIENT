@@ -23,12 +23,15 @@
     </section>
     <hr/>
 
+
+
+
     <!-- LISTS -->
     <div ng-repeat='item in TC.list'>
         
         <div class="tracker-list panel-fill">
             <div class="row">
-            <div class="project-text"> {{ item.name }} - {{ item.project_name }}</div>
+            <div class="project-text"> {{ item.title }} - {{ item.project_name }}</div>
             <div class="float-right"> {{ item.date | date : shortTime : 'UTC' }} </div>
             </div>
             <hr/>
@@ -51,7 +54,7 @@
             <div class="row">
                 <input class="form-control stretch" type="text" ng-model="task" placeholder="Add a task">
                 <i class="fa fa-plus fa-2x inset-item tracker-icon" ng-click="TC.addTask(item.list_id, task); task='';"></i>
-                <i class="fa fa-floppy-o fa-2x inset-item tracker-icon" ng-click="TC.saveList();"></i>
+                <i class="fa fa-floppy-o fa-2x inset-item tracker-icon" ng-click="TC.saveList(item.id, item.list_id);"></i>
             </div>
 
 

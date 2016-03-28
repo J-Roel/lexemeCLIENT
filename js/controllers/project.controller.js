@@ -7,6 +7,7 @@ app.controller( 'ProjectCtrl', ['$scope', '$rootScope', '$window', '$route', '$l
 function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService){
 
 
+
 	//vm for "this" view model
 		var vm = this;
 	
@@ -44,10 +45,8 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 
 
 
-
-
 	//CONTROLLER FUNCTIONS
-	//============================================
+	//===========================================
 
 
 		function viewProject(id){
@@ -76,28 +75,28 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 					//Gather all our project ids to get comments
 					var projectIds = [];
 
-					for(var project in vm.projects){
-						projectIds.push(vm.projects[project].id);
-					}
+					// for(var project in vm.projects){
+					// 	projectIds.push(vm.projects[project].id);
+					// }
 
-					//Store in an object so we can pass it to req.body
-					var newData = {
-						projectIds: projectIds
-					}
+					// //Store in an object so we can pass it to req.body
+					// var newData = {
+					// 	projectIds: projectIds
+					// }
 
 					// //Check to see if we found any projects, if so then proceed
 					// //to grab them from our server
 					if (projectIds.length > 0){
 
 						//call api to get project notes
-						APIService.callAPI('getProjectNotes', newData)
-						.then(function(response){
-							if(response){
-								//console.log("Response from messages: ", response);
-							} else {
-								console.error('Did not recieve project messages');
-							}
-						})
+						// APIService.callAPI('getProjectNotes', newData)
+						// .then(function(response){
+						// 	if(response){
+						// 		//console.log("Response from messages: ", response);
+						// 	} else {
+						// 		console.error('Did not recieve project messages');
+						// 	}
+						// })
 					}
 
 
@@ -158,10 +157,12 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 			var id = 0; //placeholder for id
 			APIService.callAPI('createProject', newProject)
 			.then(function(response){
+				console.log("HELLO");
 				if(response){
-					//vm.projects = repsonse.data;
+					console.log("Newly created id: ", response.data)
+					
 					$route.reload();
-					$location.path('/dashboard');
+					//$location.path('/workspace/' + response.data);
 				} else {
 					console.error('Did not successfully create user.')
 					$rootScope.message = "Error: Cannot create project."
@@ -195,12 +196,15 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 
 
 		//DELETE A PROJECT
-		function deleteProject(action){
-			if($routeParams.id){
-				var id = $routeParams.id
-				APIService.callAPI('deleteProject', id).then(function(response){
+		function deleteProject(projectId){
+			
+			if(projectId){
+				var rndInfo = "";
+				APIService.callAPI('deleteProject', rndInfo, projectId).then(function(response){
 					if(response){
-						response = "Delected Successfully";
+						console.log('Deleted Project')
+						$route.reload();
+						// $location.path('/dashboard');
 					} else {
 						console.error("Did not recieve any data.");
 					}

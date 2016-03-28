@@ -2,9 +2,9 @@
 var app = angular.module("LexemeApp");
 
 //Setup our app's main controller (also takes care of our home view) -------------------------
-app.controller( 'WorkspaceCtrl', ['$scope', '$routeParams', WorkspaceCtrl]);
+app.controller( 'WorkspaceCtrl', ['$scope', '$routeParams', '$location', 'APIService', WorkspaceCtrl]);
 
-function WorkspaceCtrl($scope, $routeParams){
+function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 
 
 	//vm for "this" view model
@@ -12,7 +12,7 @@ function WorkspaceCtrl($scope, $routeParams){
  
 	//DEFINE CONTROLLER VARIABLES
 	//============================================
-
+    vm.currentProject;
 		
 
 
@@ -20,24 +20,76 @@ function WorkspaceCtrl($scope, $routeParams){
 	//FUNCTION DECLARATIONS
 	//============================================
 		vm.check = check; //Testing funciton to see html code from #desktop
-	
-
+	  vm.saveProject = saveProject;
+    vm.goToDashboard = goToDashboard;
+    vm.clearDesktop = clearDesktop;
 
 
 	//CONTROLLER INITIALIZATION FUNCTIONS
 	//============================================
+      //GET A PROJECT--------------------------------
+      
+        if($routeParams.id){//Make sure we have an id from our route
+            var id = $routeParams.id; //set our id from our route
 
+            //Make call to our APIService which talks to our user
+            var stuff = '';
+            APIService.callAPI('getProject', stuff, id).then(function(response){
+                if(response){
+                    vm.currentProject = response.data;
+
+                    $('#desktop').append(vm.currentProject[0].project_html);
+
+                } else {
+                    console.error('Did not get a project!');
+                }
+            });//End promise
+     
+        } else {
+     
+          console.log("No Project Found, returning to dashboard");
+          $location.path("/dashboard");
+     
+        }
+    
 
 
 	//CONTROLLER FUNCTIONS
 	//============================================
+      //Save project to API
+      function saveProject(projectId){
+            console.log("Project to update: ", projectId);
+            var htmlCode = $('#desktop').html();
+            var updateHTML = "'"+ htmlCode + "'";
 
+            var projectInfo = {
+                id: projectId,
+                project_html: htmlCode
+            }
+
+
+            APIService.callAPI('updateProject', projectInfo, projectId).then(function(response){
+                if(response){
+                    vm.currentProject = response.data;
+                } else {
+                    console.error('Did not get a project!');
+                }
+            });//End promise
+      };
 
 			//Test function to see HTML code inside #desktop
 			function check(){
 				var htmlCode = $('#desktop').html();
 				alert(htmlCode);
-			}
+			};
+
+      function goToDashboard(){
+        $location.path("/dashboard");
+      }
+
+      function clearDesktop(){
+        $('#desktop').html("");
+      }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }; //END CONTROLLER
@@ -84,7 +136,7 @@ app.directive('jrMakeBoxButton', function($compile) {
                 var el = $compile('<div jr-menu class="box"></div>')(scope);
 				
 				//Setup resizable
-				el.resizable();
+				el.resizable({snap: true});
 
 				//Setup draggable
 				el.draggable({
@@ -115,7 +167,7 @@ app.directive('jrMenu', function(){
 		template: "<ul class='jr-menu-ul' ng-show='showMenu'>" +
 			"<li class='jr-menu'><i  ng-click='addText();' class='fa fa-pencil-square-o'></i>" +
 			"<li class='jr-menu'><i ng-click='changeColor();' class='fa fa-eyedropper'></i>" +
-			"<li class='jr-menu'><i ng-click='changeBackColor();' class='fa fa-eyedropper'></i>" +
+			"<li class='jr-menu'><i ng-click='changeBackColor();' class='fa fa-paint-brush'></i>" +
 			"<li class='jr-menu'><i  ng-click='changeBorder();' class='fa fa-square-o'></i>" +
 			"<li class='jr-menu'><i  ng-click='removeElement();' class='fa fa-ban'></i>" +
 		

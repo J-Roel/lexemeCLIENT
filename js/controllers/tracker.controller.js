@@ -11,7 +11,6 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
 
 
 
-
 	//DEFINE CONTROLLER VARIABLES
 	//============================================
 		vm.list = [
@@ -34,13 +33,13 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
 		vm.addList = addList;
     vm.statusChange = statusChange;
     vm.saveList = saveList;
-
-
+    vm.getTrackers = getTrackers;
+    vm.removeTracker = removeTracker;
 
 
 	//CONTROLLER INITIALIZATION FUNCTIONS
 	//============================================
-
+      vm.getTrackers();
 
 
 
@@ -79,8 +78,9 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
               for(var i = 0; i < vm.list.length; i++)
               {
                 if(vm.list[i].list_id == listId){
-                  console.log("HEY: ", vm.list[i], listId )
                     vm.list.splice(i,1);
+                  vm.removeTracker(listId);
+
                 }
               }
         }
@@ -117,7 +117,8 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
             APIService.callAPI('createTracker', newList)
             .then(function(response){
               if(response){
-
+                  console.log("NEW ID FOR TRACKER: ", response.data);
+                  
               }else{
 
               }
@@ -133,8 +134,9 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
         }
 
 
+
         //------------------------------
-        //changes thes tatus of our individual tasks
+        //changes the status of our individual tasks
         function statusChange(index, status, listId){
             //console.log("Status Change: ", index, status, listId);
             for(var i = 0; i < vm.list.length; i++)
@@ -146,9 +148,97 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
         }
 
 
-        function saveList(listId){
-            console.log("LISTID TO SAVE: ", listId);
-            console.log('List: ', vm.list[listId]);
+        //-----------------------------------------------------------
+        //UPDATE OUR LIST ON THE SERVER
+        function saveList(trackerId, listId){
+
+            for(var i = 0; i < vm.list.length; i++)
+            {
+                if(vm.list[i].list_id == listId){
+                  
+                  if(vm.list[i].status){
+                      var status = vm.list[i].status.join();
+                      console.log("Status: ", status);
+                  }
+                  if(vm.list[i].task){
+                      var task = vm.list[i].task.join();
+                  }
+                    
+                }
+            }
+
+            //Set the two variables we want to update on our API
+            var updateInfo = {
+                task: task,
+                status: status
+            }
+
+            //Make the API call to update teh information
+            APIService.callAPI('updateTracker', updateInfo, trackerId)
+            .then(function(response){
+              if(response){
+                //console.log('Success');
+              }
+
+            }).catch(function(error){
+                  $rootScope.appMessage="Error Creating Tracker List";
+
+            });
+
+
+        }
+
+
+
+        function removeTracker(listId){
+              console.log("Removing: ", listId);
+              var updateInfo="";
+
+              APIService.callAPI('removeTracker', updateInfo, listId)
+            .then(function(response){
+              if(response){
+                  console.log("Successfully Deleted");
+              }else{
+
+              }
+
+            }).catch(function(error){
+                  $rootScope.appMessage="Error Deleting Tracker List";
+            });
+        };
+
+
+
+        function getTrackers(){
+             APIService.callAPI('getUserTrackers')
+            .then(function(response){
+              if(response){
+                  vm.list = response.data;
+                  
+                  //If our list is not empty or undefined then we split the
+                  //strings up into arrays, else we just add an empty array
+                  for(var i = 0; i <= vm.list.length-1; i++){
+          
+                    if(vm.list[i].status !== "" || vm.list[i].status !== undefined){
+                      vm.list[i].status = vm.list[i].status.split(",");
+                      vm.list[i].task = vm.list[i].task.split(",");
+                    } else {
+                      vm.list[i].status = [];
+                      vm.list[i].task = [];
+                    }
+
+                  }
+
+
+
+
+              }else{
+
+              }
+
+            }).catch(function(error){
+                  $rootScope.appMessage="Error Creating Tracker List";
+            });
         }
 
 

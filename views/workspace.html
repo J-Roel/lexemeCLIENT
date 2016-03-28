@@ -1,21 +1,23 @@
+<div class="workspace">
 <section class="container row">
 	<div ng-include src="'../views/partials/header'"></div>
 </section>
+
 
 <!-- Get all scopes to workspace -->
 <div ng-controller="UserCtrl as UC">
 <div ng-controller="ProjectCtrl as PC">
 <div ng-controller="WorkspaceCtrl as Work">
 
-	<!-- MENU -->
-	<!-- MENU ITEMS -->
+	
 	<section class="container row">
 	 <nav>
         <div class="two-third">
-
             <ul>
-        		<!-- Default - does nothing -->
-        		<li>{{ PC.projects[0].project_name }}</li>
+            	<li class="project-profile">
+					<img src="{{ Work.currentProject[0].image_url }}">
+				</li>
+        		<li class="project-profile-text">{{ Work.currentProject[0].project_name }}</li>
             </ul>
 
         </div>
@@ -23,17 +25,29 @@
         	<!-- //Add a box to the scene -->
             <ul class="float-right">
             	<li><jr-make-box-button></jr-make-box-button></li>
+            	<li><i class="fa fa-floppy-o fa-2x icon" ng-click="Work.saveProject(Work.currentProject[0].id);"></i></li>
+            	<li><i class="fa fa-times-circle fa-2x icon" ng-click="Work.clearDesktop();"></i></li>
+            	<li></li>
+            	<li><i class="fa fa-chevron-circle-left fa-2x icon" ng-click="Work.goToDashboard();"></i></li>
+            	
 			</ul>
 		</div>
 	</nav>
 	</section>
 
-	
+
+
+	<section>
 	<!-- DESKTOP -->
-	<div class="desktop-container row" id="desktop" jr-track-mouse>
-		<!-- WORK AREA -->
-		
-	</div>
+		<div class="full-column">
+			<div class="desktop-container" id="desktop" jr-track-mouse></div>
+		</div>
+	</section>
+
+
+
+	<!-- Bottom status bar -->
+	<section class="container row">
 	<nav>
         <div class="two-third">
             <ul>
@@ -46,8 +60,10 @@
             	<li>{{ myX }}, {{ myY }}</li>
 			</ul>
 		</div>
-	
+	</nav>
+	</section>
 
+</div>
 </div>
 </div>
 </div>

@@ -165,8 +165,8 @@ nav ul li a:active{}
 	margin-left: 2%;
 	margin-bottom: 2%;
 	background-color: #fff;
-	width: 22em;
-	height: 25em;
+	width: 17em;
+	height: 20em;
 	border: 1px solid #000;
 	border-radius: 4px;
 	transition: 0.2s;
@@ -204,7 +204,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 	font-family: 'Hind', sans-serif;
 	font-size: 1em;
 	color: #000;
-	background:;
+}
+.project-text-adjust{
+	line-height: 5px;
+	vertical-align: middle;
 }
 
 

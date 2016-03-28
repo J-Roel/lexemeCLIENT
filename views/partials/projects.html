@@ -22,25 +22,31 @@
 		<!-- ng-repeat show projects -->
 		<div ng-repeat="project in PC.projects">
 			
-			<a href="/#/workspace">
+			
 				
 				<div class="project-panel panel-fill">
-					
-					<div class="project-img">
-						
-						<img src="{{ project.image_url }}">
-					
-					</div>
-					
-					<div class="project-title-area project-text">
-						{{ project.project_name }}
-					</div>
-					<hr/>
-					
 
+					<a href="/#/workspace/{{ project.id }}">
+						<div class="project-img">
+							<img src="{{ project.image_url }}">
+						</div>
+					</a>
+
+					<div class="row">
+					<div class="one-half">
+						<a href="/#/workspace/{{ project.id }}">
+							<div class="project-title-area project-text project-text-adjust">
+								{{ project.project_name }}
+							</div>
+						</a>
+					</div>
+					<div class="one-half">
+						<i class="float-right fa fa-times-circle fa-2x inset-item" ng-click="PC.deleteProject(project.id);"></i>
+					</div>
+					
 				</div>
 
-			</a>
+			
 
 		</div>
 

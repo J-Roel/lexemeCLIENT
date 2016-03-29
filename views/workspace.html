@@ -24,7 +24,6 @@
         <div class="one-third">
         	<!-- //Add a box to the scene -->
             <ul class="float-right">
-            	<li><jr-make-box-button></jr-make-box-button></li>
             	<li><i class="fa fa-floppy-o fa-2x icon" ng-click="Work.saveProject(Work.currentProject[0].id);"></i></li>
             	<li><i class="fa fa-times-circle fa-2x icon" ng-click="Work.clearDesktop();"></i></li>
             	<li></li>
@@ -39,9 +38,12 @@
 
 	<section>
 	<!-- DESKTOP -->
-		<div class="full-column">
+		<div class="three-fourth">
 			<div class="desktop-container" id="desktop" jr-track-mouse></div>
 		</div>
+        <div class="one-fourth">
+            <div ng-include src="'../views/workspace/menu'"></div>
+        </div>
 	</section>
 
 

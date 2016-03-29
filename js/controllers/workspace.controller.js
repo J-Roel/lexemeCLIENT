@@ -13,8 +13,19 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 	//DEFINE CONTROLLER VARIABLES
 	//============================================
     vm.currentProject;
-		
+		vm.selected;
+    vm.tool = "pointer";
+    
 
+    vm.red = "20";
+    vm.green = "20";
+    vm.blue = "20";
+    vm.alpha = "0.7";
+    vm.curColor = "rgba(" + vm.red + "," + vm.green + "," + vm.blue + "," + vm.alpha + ")";
+
+    vm.fontSize;
+    vm.fontFamily;
+    vm.zIndex;
 
 
 	//FUNCTION DECLARATIONS
@@ -23,15 +34,16 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 	  vm.saveProject = saveProject;
     vm.goToDashboard = goToDashboard;
     vm.clearDesktop = clearDesktop;
+    vm.addText = addText;
+    vm.applyFont = applyFont;
+    vm.applyZIndex = applyZIndex;
 
 
 	//CONTROLLER INITIALIZATION FUNCTIONS
 	//============================================
       //GET A PROJECT--------------------------------
-      
         if($routeParams.id){//Make sure we have an id from our route
             var id = $routeParams.id; //set our id from our route
-
             //Make call to our APIService which talks to our user
             var stuff = '';
             APIService.callAPI('getProject', stuff, id).then(function(response){
@@ -39,9 +51,22 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
                     vm.currentProject = response.data;
 
                     $('#desktop').append(vm.currentProject[0].project_html);
+                    
+                    $('#desktop').children().draggable({
+                            snap: true,
+                            containment: "parent",
+                            //start: function(ev, ui) {},
+                            //drag: function(ev, ui) {}
+                    })
+                    $('#desktop').children().resizable();
+                    $('#desktop').children().resizable("destroy");
+                    $('#desktop').children().resizable({ 
+                      handles: "n, e, s, w"
+                    });
 
                 } else {
                     console.error('Did not get a project!');
+                    $location.path('/');
                 }
             });//End promise
      
@@ -51,14 +76,105 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
           $location.path("/dashboard");
      
         }
-    
+        
+
+        //--------------------
+        //Add Text
+        function addText(){
+            $('.is-selected').find('p').remove();
+            var txt = $('.little-text-box').find('input').val();
+            console.log("TEXT: ", txt)
+            $('little-text-box').find('input').val('');
+            $('.little-text-box').css('visibility', 'hidden');
+            $('.is-selected').append('<p>'+ txt + '</p>');
+            vm.tool = 'pointer';
+        }
+        function applyFont(){
+           $('.is-selected').find('p').css('font-family', vm.fontFamily);
+           $('.is-selected').find('p').css('font-size', vm.fontSize + "px");
+        }
+        function applyZIndex(){
+           $('.is-selected').css('z-index', vm.zIndex);
+        }
+
+        //----------------------------------------------------------------
+        //HANDLES CLICKING OF OUR BOXES
+        $("#desktop").on("click", ".box", function(){
+
+            switch(vm.tool)
+            {
+              
+              case 'pointer' :
+                  $('#desktop').children().removeClass('is-selected');
+                  $(this).addClass("is-selected");
+              break;
+              
+              case 'paint' :
+                    var color = $('.color-selector').css("background-color");
+                    $(this).css('background-color', color);
+                    vm.tool='pointer';
+                  
+              break;
+              case 'paint-text':
+                    var color = $('.color-selector').css("background-color");
+                    $(this).css('color', color);
+                    vm.tool='pointer';
+              break;
+              case 'text' :
+                  $('#desktop').children().removeClass('is-selected');
+                  $(this).addClass("is-selected");
+                      var elTop = $(this).css('top');
+                      var elLeft = $(this).css('left');
+                      $('.little-text-box').css('visibility', 'visible');
+                      $('.little-text-box').css('top', elTop);
+                      $('.little-text-box').css('left', elLeft);
+                      vm.tool='pointer';
+              break;
+
+              case 'delete' :
+                $(this).remove();
+                vm.tool='pointer';
+              break;
+
+            }
+
+        
+
+        });
+
+        
+        
+              
+
+
+
+
+
+
 
 
 	//CONTROLLER FUNCTIONS
 	//============================================
+
+      function setColor(color){
+        if(color || color !== ""){
+            vm.selected.css('background-color', color);
+        }
+      }
+
+
       //Save project to API
       function saveProject(projectId){
             console.log("Project to update: ", projectId);
+
+            var children = $('#desktop').children();
+            if(children > 0){
+                for(var i = 0; i <= children.length(); i++){
+                    children[i].draggable("destroy");
+                    children[i].resizable("destroy");
+                }
+            }
+
             var htmlCode = $('#desktop').html();
             var updateHTML = "'"+ htmlCode + "'";
 
@@ -93,6 +209,7 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 }; //END CONTROLLER
+
 
 
 
@@ -133,10 +250,10 @@ app.directive('jrMakeBoxButton', function($compile) {
         template: "<i ng-click='addBox();' class='fa fa-square inset fa-2x icon'></i>",
         link: function(scope, element, attr) {
             scope.addBox = function() {
-                var el = $compile('<div jr-menu class="box"></div>')(scope);
+                var el = $compile('<div class="box"></div>')(scope);
 				
 				//Setup resizable
-				el.resizable({snap: true});
+				el.resizable({handles: "n, e, s, w"});
 
 				//Setup draggable
 				el.draggable({
@@ -155,6 +272,25 @@ app.directive('jrMakeBoxButton', function($compile) {
 });
 
 
+app.directive('jrDesktop', function(){
+  return {
+    restrict: 'A',
+    controller: ['$scope', function($scope) {
+          var vm = this;
+
+        }],
+
+    link: function(scope, elem, attrs){
+        
+        elem.bind('click', function(){
+            console.log(attrs);
+        });    
+
+    }
+  }
+});
+
+
 app.directive('jrMenu', function(){
 	return {
 		restrict: 'A',
@@ -162,16 +298,9 @@ app.directive('jrMenu', function(){
       		var vm = this;
 
       	}],
-      	scope: {},
+      	// scope: {},
 
-		template: "<ul class='jr-menu-ul' ng-show='showMenu'>" +
-			"<li class='jr-menu'><i  ng-click='addText();' class='fa fa-pencil-square-o'></i>" +
-			"<li class='jr-menu'><i ng-click='changeColor();' class='fa fa-eyedropper'></i>" +
-			"<li class='jr-menu'><i ng-click='changeBackColor();' class='fa fa-paint-brush'></i>" +
-			"<li class='jr-menu'><i  ng-click='changeBorder();' class='fa fa-square-o'></i>" +
-			"<li class='jr-menu'><i  ng-click='removeElement();' class='fa fa-ban'></i>" +
-		
-		"</ul>",
+		templateUrl: "", 
 
 
 		link: function(scope, elem, attrs){

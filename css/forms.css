@@ -52,6 +52,7 @@ select{
 	padding: 0.4em 0.7em 0.4em 0.7em;
 	border-radius: 4px;
 	font-size: 1.1em;
+	text-decoration: none;
 }
 .btn-reg {
 	border: 1px solid #fff;
@@ -85,6 +86,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
 	/*color: #FFA134;*/
 	color: #222;
 	font-size: 14px;
+	text-decoration: none;
 }
 .btn-info {
 	background: #ccc;
@@ -95,4 +97,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4e391', end
 
 .btn:hover{
 	box-shadow: 1px 1px 3px 2px #000;
+}
+a {
+	text-decoration: none;
 }

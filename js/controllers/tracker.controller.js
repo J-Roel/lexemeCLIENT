@@ -158,7 +158,6 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
                   
                   if(vm.list[i].status){
                       var status = vm.list[i].status.join();
-                      console.log("Status: ", status);
                   }
                   if(vm.list[i].task){
                       var task = vm.list[i].task.join();
@@ -177,11 +176,12 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
             APIService.callAPI('updateTracker', updateInfo, trackerId)
             .then(function(response){
               if(response){
-                //console.log('Success');
+                console.log('Tracker Saved');
+              
               }
 
             }).catch(function(error){
-                  $rootScope.appMessage="Error Creating Tracker List";
+                  
 
             });
 
@@ -197,13 +197,14 @@ function TrackerCtrl($scope, $rootScope, $routeParams, APIService){
               APIService.callAPI('removeTracker', updateInfo, listId)
             .then(function(response){
               if(response){
-                  console.log("Successfully Deleted");
+                  
+                  console.log('Successfully Deleted Tracker');
               }else{
 
               }
 
             }).catch(function(error){
-                  $rootScope.appMessage="Error Deleting Tracker List";
+                  console.log("Error Deleting Tracker List");
             });
         };
 

@@ -28,20 +28,42 @@
     border: 1px solid #000;
 }
 
-.jr-menu-ul{
-  display: inline-block;
-  float: right;
+
+.is-selected{
+   outline: 5px dotted blue;
 }
-.jr-menu{
-  display: inline-block;
-  list-style: none;
-  width: 20px;
-  height: 20px;
-}
-.jr-menu:hover{
-  text-shadow: 0.25px 0.25px 2px 1px #fff;
+.little-text-box{
+  visibility: hidden;
+  position: fixed;
+  top: 200px;
+  left: 200px;
+  z-index: 9999;
 }
 
+/*-----------------------*/
+/*  COLOR PICKER */
+/*=======================*/
+.color-selector {
+  width: 200px;
+  border: 2px groove #000;
+  padding: 4px;
+  margin-bottom: 2em;
+}
+.color-range {
+  margin: 0;
+  padding: 0;
+  width: 80%;
+}
+.color-box {
+    display: inline-block;
+    width: 30px;
+    font-size: 14px;
+}
+.color-selector span {
+  width: 15%;
+  font-size: 1em;
+
+}
 
 /*-----------------------*/
 /*	TOOLS */
@@ -56,8 +78,15 @@
 .icon:hover{
 	text-shadow: 0px 2px 3px rgba(0,0,0,0.4);
 }
-
-
+.pad-left{
+  padding-left:2%;
+}
+.font-container{
+   width: 200px;
+  border: 2px groove #000;
+  padding: 4px;
+  margin-bottom: 1.4em;
+}
 /*-----------------------*/
 /*  STRUCTURE */
 /*=======================*/

@@ -1,17 +1,55 @@
 <!-- MENU ITEMS -->
-<section class="container row">
-	 <nav>
-        <div class="two-third">
-            <ul>
-              <li>{{ PC.project_name }}</li>
-              <li><button ng-click="Work.check();">Check</button></li>
-              <li><i class="fa fa-square inset fa-2x icon"></i></li>
-            </ul>
-        </div>
-        <div class="one-third">
-            <ul class="float-right">
-            	<li>{{ myX }}, {{ myY }}</li>
-			</ul>
-		</div>
-	</nav>
-</section>
+
+
+<!-- <div><i ng-click='addText();' class='fa fa-pencil-square-o'></i></div>
+<div><i ng-click='changeColor();' class='fa fa-eyedropper'></i></div>
+
+<div><i ng-click='changeBorder();' class='fa fa-square-o'></i></div>
+<div><i ng-click='removeElement();' class='fa fa-ban'></i></div> -->
+
+<div class="centered color-selector" style="background-color: rgba({{red}},{{green}},{{blue}},{{alpha}});">
+    <input class="color-box" type="text" ng-model="red"/>
+    <input class="color-box" type="text" ng-model="green"/>
+    <input class="color-box" type="text" ng-model="blue"/>
+    <input class="color-box" type="text" ng-model="alpha"/>
+    <br/>
+    <span>R:</span><input class="color-range" ng-model="red" ng-init="red='20'" type="range" min="0" max="255" step="1"/><br/>
+    <span>G:</span><input class="color-range" ng-model="green" ng-init="green='20'" type="range" min="0" max="255" step="1"/><br/>
+    <span>B:</span><input class="color-range" ng-model="blue" ng-init="blue='20'" type="range" min="0" max="255" step="1"/><br/>
+    <span>A:</span><input class="color-range" ng-model="alpha" ng-init="alpha='0.7'" type="range" min="0" max="1" step="0.1"/><br/>
+</div>
+
+
+<div class="centered tools">
+  <jr-make-box-button></jr-make-box-button>
+  <i ng-click="Work.tool='pointer'" class="fa fa-mouse-pointer fa-2x icon pad-left"></i>
+  <i ng-click="Work.tool='paint'" class="fa fa-paint-brush fa-2x icon pad-left"></i>
+  <i ng-click="Work.tool='paint-text'" class="fa fa-font fa-2x icon pad-left"></i>
+  <i ng-click="Work.tool='text'" class="fa fa-pencil-square-o fa-2x icon pad-left"></i>
+  <i ng-click="Work.tool='delete'" class="fa fa-ban fa-2x icon pad-left"></i>
+</div>
+<br/>
+
+
+<div class="centered font-container">
+Font
+    <select ng-model="Work.fontFamily">
+        <option selected value="Arial">Arial</option>
+        <option value="Verdana ">Verdana </option>
+        <option value="Impact ">Impact </option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+    </select>
+
+    <input id="fontSize" ng-model="Work.fontSize" ng-init="fontSize='20'" type="range" min="10" max="100" step="2">{{ Work.fontSize }}
+<button ng-click="Work.applyFont();">Apply</button>
+</div>
+
+<div class="centered font-container">
+Z-Index
+    <input id="zIndex" ng-model="Work.zIndex" ng-init="zIndex='0'" type="range" min="0" max="1000" step="1">{{ Work.zIndex }}
+<button ng-click="Work.applyZIndex();">Apply</button>
+</div>
+
+
+<div class="little-text-box">
+<input ng-model="txt" type="textarea"/><button ng-click="Work.addText($event)"> Add </button> </div>

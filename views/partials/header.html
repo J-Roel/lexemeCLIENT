@@ -1,3 +1,4 @@
+<div ng-show="MC.showMessage" class="app-message">{{ MC.appMessage }}</div>
 <header>
     <nav>
 
@@ -10,7 +11,7 @@
 
         <div class="three-fourth">
             <ul class="float-right">
-              <li ng-show="!loggedIn"><a href="#/login">LOGIN</a></li>
+              <li ng-show="!loggedIn"><a ng-click="showLogin = !showLogin">LOGIN</a></li>
                   <li ng-show="!loggedIn"><a href="#/register">REGISTER</a>
                   </li>
 

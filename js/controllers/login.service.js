@@ -63,6 +63,7 @@ function APILogin($rootScope, $http, $location, $window) {
 	    			//redirect to dashboard
 					$location.path('/dashboard');
 
+
 	    		} else {
 
 	    			console.log('ERROR LOGGING IN', data);
@@ -76,8 +77,8 @@ function APILogin($rootScope, $http, $location, $window) {
 		        delete $window.sessionStorage.token;
 
 		        // Handle login errors here
+		        
 
-		        $rootScope.appMessage = status + " We do not recognize you. Please Register.";
 	  		});
 
 		},//END SUBMIT

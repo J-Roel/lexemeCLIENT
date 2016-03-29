@@ -1,9 +1,37 @@
 <div ng-include src="'../views/partials/header.html'"></div>
 
 
-<section>
 
 
+<!-- SECTION ONE -->
+<section class="container row section section-one">
+
+
+<div class="section-one-hero">
+	<div class="centered container">
+		<h1 class="title" id="logo"> Le<span>x</span>eme</h1>			
+	</div>
+</div>
+
+	<div class="one-third pad-left">
+		<a href="#/register"><button class="centered btn btn-reg btn-front">REGISTER</button></a>
+	</div>
+	<div class="one-third pad-left">
+		<a href="#/"><button class="centered btn btn-reg btn-front">HOW IT WORKS</button></a>
+	</div>
+	<div class="one-third pad-left">
+		<button ng-model="showLogin" ng-init="showLogin=false" ng-click="showLogin = !showLogin" class="centered btn btn-reg btn-front">LOGIN</button>
+		<div ng-show="showLogin">
+			<div ng-include="'../views/login'"></div>
+		</div>
+	</div>
+	
+</section>
+
+
+
+<!-- SECTION TWO -->
+<section class="container row section section-two">
 
 
 
@@ -13,12 +41,31 @@
 
 
 
+<!-- SECTION THREE -->
+<section class="container row section section-three">
 
 
+
+
+
+</section>
+
+
+
+<script>
+		// $(document).ready(function(){
+		//   $('.section-one').mousemove(function(e){
+		//   		console.log(e.pageX);
+		//         // var x = e.pageX - this.offsetLeft;
+		//         // var y = e.pageY - this.offsetTop;
+		//         var x = e.pageX - 100;
+		//         var y = e.pageY - 100;
+		//         $('#logo').css({'left': x, 'top':y}); 
+		//   });
+		// });
+</script>
 
 
 
 
 <div ng-include src="'../views/partials/footer.html'"></div>
-
-

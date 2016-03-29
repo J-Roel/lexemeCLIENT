@@ -9,12 +9,9 @@ app.controller( 'MainCtrl', ['$scope', '$rootScope', '$window', MainCtrl]);
 
 function MainCtrl($scope, $rootScope, $window){
 
-	var vm = this;
-
 
 	//define variables
 	//============================================
-
 
 		//This is to determine a user is logged in
 		//Default is set to false
@@ -25,12 +22,12 @@ function MainCtrl($scope, $rootScope, $window){
     		$rootScope.loggedIn = false;
     		return false;
     	}
-    	
-    	$rootScope.appMessage = "";
-	
+
+  
+
+
+
 };//End Controller
-
-
 
 
 

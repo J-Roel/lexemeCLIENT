@@ -2,8 +2,7 @@
 <h4>WYSIWYG creation and collaboration platform</h4>
 <hr/>
 <h3>Description</h3>
-<p>Lexeme; pronounced 'lex-seem'. Is exactly as the definition states: an abstract communication tool. It's main purpose is to solve the problem of collaboration between designers and clients with basic design structures like html.</p>
-<p>It also allows users to adhire to an Agile development environment by setting up a project owner, scrum master.</p>
+<p>Lexeme; pronounced 'lex-seem'. Is an abstract communication tool. Lexeme allows fast wireframing right on the DOM while allowing users to track their user stories and "to-dos"
 
 
 

@@ -1,0 +1,9 @@
+{
+  "firebase": "lexeme",
+  "public": "lexemeCLIENT",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

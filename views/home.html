@@ -1,11 +1,12 @@
-<div ng-include src="'../views/partials/header.html'"></div>
+<!-- Message Controller -->
 
+<div id="top"></div>
+<div ng-include src="'../views/partials/header.html'"></div>
 
 
 
 <!-- SECTION ONE -->
 <section class="container row section section-one">
-
 
 <div class="section-one-hero">
 	<div class="centered container">
@@ -13,43 +14,84 @@
 	</div>
 </div>
 
-	<div class="one-third pad-left">
-		<a href="#/register"><button class="centered btn btn-reg btn-front">REGISTER</button></a>
-	</div>
-	<div class="one-third pad-left">
-		<a href="#/"><button class="centered btn btn-reg btn-front">HOW IT WORKS</button></a>
-	</div>
-	<div class="one-third pad-left">
-		<button ng-model="showLogin" ng-init="showLogin=false" ng-click="showLogin = !showLogin" class="centered btn btn-reg btn-front">LOGIN</button>
-		<div ng-show="showLogin">
-			<div ng-include="'../views/login'"></div>
+	<div class="centered buttons">
+		<div class="one-fourth">
+			<button ng-model="MC.showRegistration" ng-click="MC.showRegistration = !MC.showRegistration; MC.showLogin=false;" class="centered btn btn-reg btn-front">REGISTER</button>
+			<div ng-show="MC.showRegistration">
+				<div ng-include="'../views/partials/register'"></div>
+			</div>
+		</div>
+		<div class="one-fourth">
+			<button ng-model="MC.showLogin" ng-click="MC.showLogin = !MC.showLogin; MC.showRegistration=false;" class="centered btn btn-reg btn-front">LOGIN</button>
+			<div ng-show="MC.showLogin">
+				<div ng-include="'../views/partials/login'"></div>
+			</div>
+		</div>
+		
+		<div class="one-fourth">
+			<a href="#how-it-works-section"><button ng-click="MC.showLogin=false; MC.showRegistration=false;" class="centered btn btn-reg btn-front">HOW IT WORKS</button></a>
+		</div>
+
+		<div class="one-fourth">
+			<a href="#contact-section"><button ng-click="MC.showLogin=false; MC.showRegistration=false;" class="centered btn btn-reg btn-front">CONTACT</button></a>
 		</div>
 	</div>
-	
+
 </section>
 
 
 
 <!-- SECTION TWO -->
+<div id="how-it-works-section">
+<a class="float-right pad" href="#top"><i class="fa fa-chevron-circle-up fa-2x inset-item c-pointer"></i></a>
+<a class="float-right pad" href="#contact-section"><i class="fa fa-chevron-circle-down fa-2x inset-item c-pointer"></i></a>
 <section class="container row section section-two">
 
+	<h1>See... this is how it works</h1>
 
-
-
-
+	
 </section>
 
 
 
 <!-- SECTION THREE -->
+<div id="contact-section">
+<a class="float-right pad" href="#top"><i class="fa fa-chevron-circle-up fa-2x inset-item c-pointer"></i></a>
 <section class="container row section section-three">
+<div class="container">
+	<div class="one-column">
+		<div style="padding-top: 5em;">
+			<h2 style="font-size: 50px; text-align: center;">Lexeme</h2>
+			<h2 style="font-size: 30px; text-align: center;">www.lexeme.tech</h2>
+			<h2 style="font-size: 30px; text-align: center;">by: Jeremy Roelfs</h2>
+			<br/>
+			
+			<h2 style="font-size: 30px; text-align: center;">jeremyroelfs@icloud.com</h2>
+			<h2 style="font-size: 30px; text-align: center;">785.772.5095</h2>
+			<h2 style="font-size: 30px; text-align: center;">www.jeremyroelfs.com</h2>
+			
+			<br/>
+<!-- SOCIAL LINKS AND ICONS: FIXED AT BOTTOM -->
+	<section class="social" style="text-align: center;">
+		
+			<a style="color: black; padding-left: 2em;" href="https://github.com/J-Roel/"><span class="fa fa-github-square fa-2x"></span></a>
+			<a style="color: black; padding-left: 2em;" href="https://www.linkedin.com/in/jeremyroelfs"><span class="fa fa-linkedin-square fa-2x"></span></a>
+			<a style="color: black; padding-left: 2em;" href="https://jeremyroelfs.com"><span class="fa fa-globe fa-2x"></span></a>
+			<a style="color: black; padding-left: 2em;" href="https://twitter.com/The_J_Roel"><span class="fa fa-twitter-square fa-2x"></span></a>
+			<a style="color: black; padding-left: 2em;" href="https://www.youtube.com/channel/UCb0VTxhTnloVIXp2tNpEr2A"><span class="fa fa-youtube-square fa-2x"></span></a>
+			<a style="color: black; padding-left: 2em;" href="https://www.youtube.com/channel/UCb0VTxhTnloVIXp2tNpEr2A"><span class="fa fa-paperclip fa-2x"></span></a>
 
 
+	</section>
+
+		</div>
+	</div>
+</div>
 
 
 
 </section>
-
+</div>
 
 
 <script>
@@ -63,6 +105,41 @@
 		//         $('#logo').css({'left': x, 'top':y}); 
 		//   });
 		// });
+
+		//Ensure elements are centered that are supposed to be centered
+		$(document).ready(function(){
+
+			  var centerX = $('.section-one').width()/2;
+			  var centerY = $('.section-one').height()/2;
+			  
+			  var offsetLogoX = $('#logo').width()/2;
+			  var offsetLogoY = $('#logo').height()/2;
+			  $('#logo').css({
+			  	'left': centerX - offsetLogoX, 
+			  	'top': (centerY-225)-offsetLogoY
+			  });
+	
+
+
+		});
+
+		$(function() {
+          $('a[href*="#"]:not([href="#"])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 500);
+                return false;
+              }
+            }
+        });
+    });
+
+
+
 </script>
 
 

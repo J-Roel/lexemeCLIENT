@@ -23,9 +23,6 @@
     </section>
     <hr/>
 
-
-
-
     <!-- LISTS -->
     <div ng-repeat='item in TC.list'>
         
@@ -54,7 +51,7 @@
             <div class="row">
                 <input class="form-control stretch" type="text" ng-model="task" placeholder="Add a task">
                 <i class="fa fa-plus fa-2x inset-item tracker-icon" ng-click="TC.addTask(item.list_id, task); task='';"></i>
-                <i class="fa fa-floppy-o fa-2x inset-item tracker-icon" ng-click="TC.saveList(item.id, item.list_id);"></i>
+                <i class="fa fa-floppy-o fa-2x inset-item tracker-icon" ng-click="TC.saveList(item.id, item.list_id); Alert.addAlert('Tracker Saved');"></i>
             </div>
 
 

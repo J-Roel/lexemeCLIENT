@@ -14,9 +14,9 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 	//============================================
     vm.currentProject;
 		vm.selected;
-    vm.tool = "pointer";
+    vm.tool = "select";
     
-
+    //Color Selector Variables
     vm.red = "20";
     vm.green = "20";
     vm.blue = "20";
@@ -31,10 +31,24 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 	//FUNCTION DECLARATIONS
 	//============================================
 		vm.check = check; //Testing funciton to see html code from #desktop
-	  vm.saveProject = saveProject;
+	  vm.changeSelect = changeSelect;
+    vm.saveProject = saveProject;
     vm.goToDashboard = goToDashboard;
     vm.clearDesktop = clearDesktop;
+    vm.setupText = setupText;
     vm.addText = addText;
+    vm.removeText = removeText;
+    vm.setupLink = setupLink;
+    vm.addLink = addLink;
+    vm.setupImg = setupImg;
+    vm.addImg = addImg;
+    vm.removeImg = removeImg;
+    vm.imgToCircle = imgToCircle;
+    vm.removeDiv = removeDiv;
+    
+    //Effects
+    vm.addGlow = addGlow;
+    vm.removeGlow = removeGlow;
     vm.applyFont = applyFont;
     vm.applyZIndex = applyZIndex;
 
@@ -55,6 +69,7 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
                     $('#desktop').children().draggable({
                             snap: true,
                             containment: "parent",
+                            scroll: true
                             //start: function(ev, ui) {},
                             //drag: function(ev, ui) {}
                     })
@@ -71,79 +86,173 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
             });//End promise
      
         } else {
-     
           console.log("No Project Found, returning to dashboard");
           $location.path("/dashboard");
-     
         }
         
 
         //--------------------
-        //Add Text
+        //SELECT MAIN MENU
+        function changeSelect(){
+             switch(vm.tool)
+           {
+              case 'select' :
+                  $('#select').addClass('menuItem-selected');
+                  $('#paint').removeClass('menuItem-selected');
+                  $('#paint-text').removeClass('menuItem-selected');
+              break;
+              case 'paint' :
+                  $('#select').removeClass('menuItem-selected');
+                  $('#paint').addClass('menuItem-selected');
+                  $('#paint-text').removeClass('menuItem-selected');
+              break;
+              case 'paint-text':
+                  $('#select').removeClass('menuItem-selected');
+                  $('#paint').removeClass('menuItem-selected');
+                  $('#paint-text').addClass('menuItem-selected');
+              break;
+              default:
+                  $('#select').addClass('menuItem-selected');
+                  $('#paint').removeClass('menuItem-selected');
+                  $('#paint-text').removeClass('menuItem-selected');
+            }//end select
+        }
+
+
+        function removeDiv(){
+            if($('#desktop').children().hasClass('is-selected'))
+            {
+                $('.is-selected').remove();
+            }
+        }
+
+        //--------------------
+        //TEXT FUNCTIONS
+        function setupText(){
+          if($('#desktop').children().hasClass('is-selected'))
+          {
+              var elTop = $('.is-selected').css('top');
+              var elLeft = $('.is-selected').css('left');
+              $('.text-box-editor').css('visibility', 'visible');
+              $('.text-box-editor').css('top', elTop);
+              $('.text-box-editor').css('left', elLeft);
+          }
+        }
         function addText(){
             $('.is-selected').find('p').remove();
-            var txt = $('.little-text-box').find('input').val();
-            console.log("TEXT: ", txt)
-            $('little-text-box').find('input').val('');
-            $('.little-text-box').css('visibility', 'hidden');
+            var txt = $('#text-box-editor').val();
+            console.log("Text:", txt);
+            $('#text-box-editor').val('');
+            $('.text-box-editor').css('visibility', 'hidden');
             $('.is-selected').append('<p>'+ txt + '</p>');
-            vm.tool = 'pointer';
+        }
+        function removeText(){
+            if($('#desktop').children().hasClass('is-selected'))
+            {
+                $('.is-selected').find('p').remove();
+            }
         }
         function applyFont(){
            $('.is-selected').find('p').css('font-family', vm.fontFamily);
            $('.is-selected').find('p').css('font-size', vm.fontSize + "px");
         }
+        function setupLink(){
+          if($('#desktop').children().hasClass('is-selected'))
+          {
+             var elTop = $('.is-selected').css('top');
+              var elLeft = $('.is-selected').css('left');
+              $('.link-box-editor').css('visibility', 'visible');
+              $('.link-box-editor').css('top', elTop);
+              $('.link-box-editor').css('left', elLeft);
+          }
+        }
+        function addLink(){
+            var pTxt = $('.is-selected').find('p').text();
+            $('.is-selected').find('p').remove();
+            var txt = $('#link-box-editor').val();
+
+            $('#link-box-editor').val('');
+            $('.link-box-editor').css('visibility', 'hidden');
+            $('.is-selected').append('<a href="'+ txt +'"><p>'+ pTxt+ '</p></a>');
+        }
+
+
+
+        //--------------------
+        //IMAGE FUNCTIONS
+         function setupImg(){
+          if($('#desktop').children().hasClass('is-selected'))
+          {
+             var elTop = $('.is-selected').css('top');
+              var elLeft = $('.is-selected').css('left');
+              $('.img-box-editor').css('visibility', 'visible');
+              $('.img-box-editor').css('top', elTop);
+              $('.img-box-editor').css('left', elLeft);
+          }
+        }
+        function addImg(){
+            $('.is-selected').find('img').remove();
+            var txt = $('#img-box-editor').val();
+            console.log("Text:", txt);
+            $('#img-box-editor').val('');
+            $('.img-box-editor').css('visibility', 'hidden');
+            $('.is-selected').append('<img src="'+ txt +'"/>');
+        }
+        function removeImg(){
+            if($('#desktop').children().hasClass('is-selected'))
+            {
+                $('.is-selected').find('img').remove();
+            }
+        }
+        function imgToCircle(){
+            $('.is-selected').css('border-radius', '50%');
+            $('.is-selected').css('overflow', 'hidden');
+        }
+
+
         function applyZIndex(){
            $('.is-selected').css('z-index', vm.zIndex);
         }
 
-        //----------------------------------------------------------------
-        //HANDLES CLICKING OF OUR BOXES
-        $("#desktop").on("click", ".box", function(){
 
-            switch(vm.tool)
-            {
-              
-              case 'pointer' :
+        //--------------------
+        //EFFECTS
+        function addGlow(){
+            $('.is-selected').addClass('lightbulb');
+        }
+        function removeGlow(){
+            $('.is-selected').removeClass('lightbulb'); 
+        }
+
+
+
+
+
+        //----------------------------------------------------------------
+        //HANDLES CLICKING
+        $("#desktop").on("click", ".box", function(){
+           
+           switch(vm.tool)
+           {
+              case 'select' :
                   $('#desktop').children().removeClass('is-selected');
                   $(this).addClass("is-selected");
               break;
-              
               case 'paint' :
                     var color = $('.color-selector').css("background-color");
                     $(this).css('background-color', color);
-                    vm.tool='pointer';
-                  
               break;
               case 'paint-text':
                     var color = $('.color-selector').css("background-color");
                     $(this).css('color', color);
-                    vm.tool='pointer';
               break;
-              case 'text' :
-                  $('#desktop').children().removeClass('is-selected');
-                  $(this).addClass("is-selected");
-                      var elTop = $(this).css('top');
-                      var elLeft = $(this).css('left');
-                      $('.little-text-box').css('visibility', 'visible');
-                      $('.little-text-box').css('top', elTop);
-                      $('.little-text-box').css('left', elLeft);
-                      vm.tool='pointer';
-              break;
-
-              case 'delete' :
-                $(this).remove();
-                vm.tool='pointer';
-              break;
-
-            }
-
-        
-
+            }//end select
         });
 
-        
-        
+        //Deselect
+        $("#desktop").on("click", "#desktop", function(){
+            $('#desktop').children().removeClass('is-selected');
+        });
               
 
 
@@ -155,6 +264,19 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 
 	//CONTROLLER FUNCTIONS
 	//============================================
+
+
+
+          //SHOW TOOLS MENUS
+          vm.showAddTools = showAddTools;
+          function showAddTools(){
+              //$('.add-tools').css('visibility', 'visible');
+              $('.add-tools').css('opacity', 1);
+          }
+
+
+
+
 
       function setColor(color){
         if(color || color !== ""){
@@ -196,7 +318,17 @@ function WorkspaceCtrl($scope, $routeParams, $location, APIService){
 			//Test function to see HTML code inside #desktop
 			function check(){
 				var htmlCode = $('#desktop').html();
-				alert(htmlCode);
+				
+        var fullCode = "<html><head>" +
+        "<title>" + vm.currentProject[0].project_name + "</title>" +
+        "<style> " +
+            "img{ width: 100%};" +
+        "</style></head><body>" +
+        htmlCode +
+        "</body></html>"
+
+
+        alert(fullCode);
 			};
 
       function goToDashboard(){
@@ -259,12 +391,16 @@ app.directive('jrMakeBoxButton', function($compile) {
 				el.draggable({
 					snap: true,
 					containment: "parent",
+          scroll: true
 					//start: function(ev, ui) {},
 					//drag: function(ev, ui) {}
 				});
 
+              var pos = $('#desktop').position();
+              
+
                 $('#desktop').append(el);
-                el.css({top: 200, left: 200, position:'absolute'});
+                el.css({top: 300, left: 300, position:'absolute'});
                 
             }
         }

@@ -6,8 +6,14 @@
 
 <div><i ng-click='changeBorder();' class='fa fa-square-o'></i></div>
 <div><i ng-click='removeElement();' class='fa fa-ban'></i></div> -->
+<div class="tools">
 
-<div class="centered color-selector" style="background-color: rgba({{red}},{{green}},{{blue}},{{alpha}});">
+
+
+<!--COLOR SELECTOR-->
+<div class="paint-tools">
+    <div class="color-selector" 
+    style="background-color: rgba({{red}},{{green}},{{blue}},{{alpha}});">
     <input class="color-box" type="text" ng-model="red"/>
     <input class="color-box" type="text" ng-model="green"/>
     <input class="color-box" type="text" ng-model="blue"/>
@@ -17,39 +23,101 @@
     <span>G:</span><input class="color-range" ng-model="green" ng-init="green='20'" type="range" min="0" max="255" step="1"/><br/>
     <span>B:</span><input class="color-range" ng-model="blue" ng-init="blue='20'" type="range" min="0" max="255" step="1"/><br/>
     <span>A:</span><input class="color-range" ng-model="alpha" ng-init="alpha='0.7'" type="range" min="0" max="1" step="0.1"/><br/>
+    </div>
 </div>
 
 
-<div class="centered tools">
-  <jr-make-box-button></jr-make-box-button>
-  <i ng-click="Work.tool='pointer'" class="fa fa-mouse-pointer fa-2x icon pad-left"></i>
-  <i ng-click="Work.tool='paint'" class="fa fa-paint-brush fa-2x icon pad-left"></i>
-  <i ng-click="Work.tool='paint-text'" class="fa fa-font fa-2x icon pad-left"></i>
-  <i ng-click="Work.tool='text'" class="fa fa-pencil-square-o fa-2x icon pad-left"></i>
-  <i ng-click="Work.tool='delete'" class="fa fa-ban fa-2x icon pad-left"></i>
-</div>
-<br/>
 
+<!-- FONT EDITOR -->
+<button class="btn btn-little" ng-click="showFontTools=!showFontTools"><i ng-model="showFontTools" ng-init="showFontTools=false"  class="fa fa-chevron-circle-right icon"></i>Font</button>
+<div ng-hide="!showFontTools" class="cssSlideUp tools-section">
+<hr/>
+    <div class="font-selector">
+    <i title="Add Text" ng-click="Work.setupText();" class="fa fa-plus fa-2x icon"></i>
+    <i title="Remove Text" ng-click="Work.removeText();" class="fa fa-trash fa-2x icon"></i>
+    <i title="Add Link" ng-click="Work.setupLink();" class="fa fa-link fa-2x icon"></i>
+    
 
-<div class="centered font-container">
-Font
-    <select ng-model="Work.fontFamily">
+    <br/>
+    Family: <select ng-model="Work.fontFamily">
         <option selected value="Arial">Arial</option>
         <option value="Verdana ">Verdana </option>
         <option value="Impact ">Impact </option>
         <option value="Comic Sans MS">Comic Sans MS</option>
     </select>
+    <br/>
+    Size:<input id="fontSize" ng-model="Work.fontSize" ng-init="fontSize='20'" type="range" min="10" max="100" step="2">{{ Work.fontSize }}
+    <button ng-click="Work.applyFont();" class="btn btn-little">Apply</button>
+</div>
+<hr/>
+</div>
+<br/>
 
-    <input id="fontSize" ng-model="Work.fontSize" ng-init="fontSize='20'" type="range" min="10" max="100" step="2">{{ Work.fontSize }}
-<button ng-click="Work.applyFont();">Apply</button>
+
+
+<!-- IMAGE EDITOR -->
+<button class="btn btn-little" ng-click="showImgTools=!showImgTools">
+<i ng-model="showImgTools" ng-init="showImgTools=false" class="fa fa-chevron-circle-right icon"></i>Image</button>
+<div ng-hide="!showImgTools" class="cssSlideUp tools-section">
+<hr/>
+    <div class="font-selector">
+    <i title="Add Image to Selected" ng-click="Work.setupImg();" class="fa fa-plus fa-2x icon"></i>
+    <i title="Change Selected to Circle" ng-click="Work.imgToCircle();" class="fa fa-circle-thin fa-2x icon"></i>
+    <i title="Remove Image From Div" ng-click="Work.removeImg();" class="fa fa-trash fa-2x icon"></i>
+</div>
+<hr/>
+</div>
+<br/>
+
+
+<!-- EFFECTS EDITOR -->
+<button class="btn btn-little" ng-click="showEffects=!showEffects"><i ng-model="showEffects" ng-init="showEffects=false"  class="fa fa-chevron-circle-right icon"></i>Effects</button>
+<div ng-hide="!showEffects" class="cssSlideUp tools-section">
+<hr/>
+    <i ng-click="Work.addGlow();" class="fa fa-bolt fa-2x icon"></i>
+    
 </div>
 
-<div class="centered font-container">
-Z-Index
-    <input id="zIndex" ng-model="Work.zIndex" ng-init="zIndex='0'" type="range" min="0" max="1000" step="1">{{ Work.zIndex }}
-<button ng-click="Work.applyZIndex();">Apply</button>
+
+
+
+
+
+<button class="btn btn-little" ng-click="showOtherTools=!showOtherTools">
+<i ng-model="showOtherTools" ng-init="showOtherTools=false" class="fa fa-chevron-circle-right icon"></i>Other Tools</button>
+<div ng-hide="!showOtherTools" class="cssSlideUp tools-section">
+<hr/>
+    Z-Index:
+    <div class="zIndex-selector">
+        <input id="zIndex" ng-model="Work.zIndex" ng-init="zIndex='0'" type="range" min="0" max="1000" step="1">{{ Work.zIndex }}
+        <i ng-click="Work.applyZIndex();" class="fa fa-caret-left fa-2x icon"></i>
+    </div>
 </div>
 
 
-<div class="little-text-box">
-<input ng-model="txt" type="textarea"/><button ng-click="Work.addText($event)"> Add </button> </div>
+
+
+
+</div> <!-- END OF TOOLS -->
+
+
+
+
+
+<!-- POPUP EDITORS -->
+<div class="text-box-editor">
+    <textarea id="text-box-editor">
+    </textarea></input><button class="btn btn-little" ng-click="Work.addText();">Add</button>
+</div>
+<div class="img-box-editor">
+    <textarea id="img-box-editor">
+    </textarea></input><button class="btn btn-little" ng-click="Work.addImg();">Add</button>
+</div>
+<div class="link-box-editor">
+    <textarea id="link-box-editor">
+    </textarea></input><button class="btn btn-little" ng-click="Work.addLink();">Add</button>
+</div>
+
+<!-- 
+<div class="text-box-selector">
+<input ng-model="txt" type="textarea" rows="4" cols="50"/><button ng-click="Work.addText($event)"> Add </button> </div> -->

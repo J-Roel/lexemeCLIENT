@@ -1,14 +1,17 @@
 <div class="login-panel">
-    <div ng-show="error" class="alert alert-danger">{{error}}</div>
-    <div class="col-md-3 col-md-offset-3">
+<div class="form-top">
+    <label class="label">Login</label>
+    <i style="padding: 10px" class="fa fa-times fa-2x inset-item float-right" ng-click="MC.showLogin=false"></i>
+</div>
 
+
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
 
         <form name="form" ng-submit="UC.loginUser(user)" role="form">
 
             <div class="form-group">
 
-                <label for="username">Username</label>
-                <i class="fa fa-key"></i>
+                <label class="label" for="username">Username</label>
                 <input type="text" name="username" id="username" class="form-control" ng-model="user.username" required />
                 <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
 
@@ -16,14 +19,13 @@
 
             <div class="form-group">
 
-                <label for="password">Password</label>
-                <i class="fa fa-lock"></i>
+                <label class="label" for="password">Password</label>
                 <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required />
                 <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
 
             </div>
 
-            <div class="form-actions">
+            <div class="form-actions centered">
                 <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger">Login</button>
             </div>
 

@@ -97,6 +97,8 @@ function APILogin($rootScope, $http, $location, $window) {
 	    	//the correct elements
 	    	$rootScope.loggedIn = false;
 
+	    	$location.path('/');
+
   		}, //END LOGOUT
 
 

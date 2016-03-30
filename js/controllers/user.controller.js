@@ -29,7 +29,7 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 	//function declarations
 	//============================================
 		//Make sure user is set
-		$rootScope.curUser = vm.user;
+		//$rootScope.curUser = vm.user;
 
 		//CRUD operations
 		vm.getUserT = getUserT; //Get our user by token
@@ -134,9 +134,10 @@ function UserCtrl($scope, $rootScope, $window, $routeParams, $location, APIServi
 			APIService.callAPI('getUserByToken', id).then(function(response){
 				if(response){
 					vm.user = response.data[0];
-
+					
 				} else {
 					console.error('Did not recieve a user!');
+				
 				}
 			});//End promise
 	

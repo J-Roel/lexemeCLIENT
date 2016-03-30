@@ -1,7 +1,13 @@
-<div ng-show="MC.showMessage" class="app-message">{{ MC.appMessage }}</div>
+
+      <div ng-repeat="alert in Alert.alerts track by $index">
+        <notification class="app-message">{{alert}}</notification>
+      </div>
+
+
+
+
 <header>
     <nav>
-
         <div class="one-fourth">
             <ul>
               <!-- <li><i class="fa fa-times fa-2x inset-item"></i></li> -->
@@ -11,8 +17,9 @@
 
         <div class="three-fourth">
             <ul class="float-right">
-              <li ng-show="!loggedIn"><a ng-click="showLogin = !showLogin">LOGIN</a></li>
-                  <li ng-show="!loggedIn"><a href="#/register">REGISTER</a>
+              <li ng-show="!loggedIn"><a ng-click="MC.showLogin = !MC.showLogin; MC.showRegistration=false;">LOGIN</a></li>
+              
+                  <li ng-show="!loggedIn"><a ng-click="MC.showRegistration = !MC.showRegistration; MC.showLogin=false;">REGISTER</a>
                   </li>
 
                   <li ng-show="loggedIn">
@@ -26,7 +33,7 @@
                   <div ng-show="showSettings" class="over-menu">
                     <li ng-show="loggedIn"><a href="#/dashboard">DASHBOARD</a>
                     </li>
-                    <li ng-show="loggedIn"><a ng-click="UC.logoutUser()">LOGOUT</a>
+                    <li ng-show="loggedIn"><a ng-click="UC.logoutUser(); MC.showRegistration=false; MC.showLogin=false;"">LOGOUT</a>
                     </li>
                   </div>      
             </ul>

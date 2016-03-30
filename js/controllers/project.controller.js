@@ -43,8 +43,6 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 
 
 
-
-
 	//CONTROLLER FUNCTIONS
 	//===========================================
 
@@ -71,42 +69,12 @@ function ProjectCtrl($scope, $rootScope, $window, $route, $location, APIService)
 					//console.log('RESPONSE FROM USER PROJECTS: ', response)
 					vm.projects = response.data;
 
-					//console.log("response: ", response.data);
-					//Gather all our project ids to get comments
-					var projectIds = [];
-
-					// for(var project in vm.projects){
-					// 	projectIds.push(vm.projects[project].id);
-					// }
-
-					// //Store in an object so we can pass it to req.body
-					// var newData = {
-					// 	projectIds: projectIds
-					// }
-
-					// //Check to see if we found any projects, if so then proceed
-					// //to grab them from our server
-					if (projectIds.length > 0){
-
-						//call api to get project notes
-						// APIService.callAPI('getProjectNotes', newData)
-						// .then(function(response){
-						// 	if(response){
-						// 		//console.log("Response from messages: ", response);
-						// 	} else {
-						// 		console.error('Did not recieve project messages');
-						// 	}
-						// })
-					}
-
-
 				} else {
 					console.error('Did not recieve a user!');
 				}
 			});//End promise
 	
 		}//end getUser
-
 
 
 

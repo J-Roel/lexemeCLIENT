@@ -1,0 +1,58 @@
+<div class="register-panel">
+<div class="form-top">
+    <label class="label">Register</label>
+    <i style="padding: 10px" class="fa fa-times fa-2x inset-item float-right" ng-click="MC.showRegistration=false"></i>
+</div>
+
+    <div ng-show="error" class="alert alert-danger">{{error}}</div>
+
+        <form name="regUser" ng-submit="UC.registerUser(user)" role="form">
+
+        <div class="form-group">
+            <label class="label">Username</label>
+            <input type="text" name="username" id="username" class="input form-control" ng-model="user.username" required />
+            <span ng-show="regUser.username.$dirty && regUser.username.$error.required" class="help-block">Username is required</span>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Password</label>
+            <input type="password" name="password" id="password" class="input form-control" ng-model="user.password" required />
+            <span ng-show="regUser.password.$dirty && regUser.password.$error.required" class="help-block">Password Required</span>
+        </div>
+
+        <div class="form-group">
+            <label class="label">First Name</label>
+            <input type="text" name="firstname" id="firstname" class="input form-control" ng-model="user.firstname" required />
+            <span ng-show="regUser.firstname.$dirty && regUser.firstname.$error.required" class="help-block">First Name is required</span>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Last Name</label>
+            <input type="text" name="lastname" id="lastname" class="input form-control" ng-model="user.lastname" required />
+            <span ng-show="regUser.lastname.$dirty && regUser.lastname.$error.required" class="help-block">Last Name is required</span>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Email</label>
+            <input type="text" name="email" id="email" class="input form-control" ng-model="user.email" required />
+            <span ng-show="regUser.email.$dirty && regUser.email.$error.required" class="help-block">Email is required</span>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Company Role</label>
+            <input type="text" name="role" id="role" class="input form-control" ng-model="user.role" required />
+            <span ng-show="regUser.role.$dirty && regUser.role.$error.required" class="help-block">Company Role is required</span>
+        </div>
+
+
+
+
+
+        <div class="form-actions centered">
+            <button ng-click"MC.showRegistration = !MC.showRegistration; MC.showLogin=false;" type="submit" ng-disabled="regUser.$invalid || dataLoading" class="btn btn-danger">Create New User</button>
+        </div>
+    </form>
+
+    
+</div>
+</div>

@@ -17,6 +17,36 @@ Colors:
 }
 
 
+.ng-hide-add, .ng-hide-remove {
+    /* ensure visibility during the transition */
+    display: block !important; /* yes, important */
+}
+
+.cssSlideUp {
+    transition: .2s linear all;
+    /*height: 80px;*/
+    height: 200px;
+    overflow: hidden;
+}
+.cssSlideUp.ng-hide {
+    height:0;
+}
+
+.cssFade {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+.cssFade.ng-hide {
+    opacity: 0;
+}
+
+.cssRotate {
+	transition: 0.5s linear all;
+	transform: rotate(0deg);
+}
+.cssRotateMe {
+	transform: rotate(90deg); 
+}
 
 
 /* --------------------- */
@@ -38,10 +68,6 @@ header {
 
 /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#8b949f+0,676e76+100;dark-gray-nice */
 background: rgb(139,148,159); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(139,148,159,1) 0%, rgba(103,110,118,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  rgba(139,148,159,1) 0%,rgba(103,110,118,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  rgba(139,148,159,1) 0%,rgba(103,110,118,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8b949f', endColorstr='#676e76',GradientType=0 ); /* IE6-9 */
 
 height: 4em;
 }
@@ -81,17 +107,20 @@ h1,h2,h3,h4,h5,h6,btn { font-family: 'Montserrat', sans-serif; }
 
 
 .app-message{
-	position: fixed;
-	left: 40%;
-	top: 0;
-	font-size: 20px;
-	color: black;
-	text-shadow: 2px 2px 7px 1px #000;
-	transition: all 2s;
+	
+	position: absolute;
 	z-index: 9999;
+	top: 2%;
+	left: 40%;
+	line-height: 5em;
+	text-align: center;
+	width: 10em;
+	height: 5em;
+ 	border-radius: 7px;
+ 	background: rgba(20,20,20,0.1);
+
+	/*transition: 1s ease;*/
 }
-
-
 
 
 
@@ -106,6 +135,7 @@ nav{
 }
 nav ul {
 	/*float: right;*/
+	display: inline-block;
 	padding: 0;
 	margin: 10px 12em 0 10px;
 }
@@ -116,6 +146,7 @@ nav ul li {
 	font-size: 1.2em;
 	color: #000;
 	padding: 0.3em;
+	cursor: pointer;
 }
 nav ul li a{
 	text-decoration: none;
@@ -494,6 +525,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     background-clip: text;
     color: transparent;
     text-shadow: rgba(255,255,255,0.5) 0px 3px 2px;*/
+    cursor: pointer;
 }
 .inset-item:hover{
 	text-shadow: 0px 2px 3px rgba(0,0,0,0.4`);

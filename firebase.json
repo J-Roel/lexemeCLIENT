@@ -1,6 +1,6 @@
 {
   "firebase": "lexeme",
-  "public": "lexemeCLIENT",
+  "public": ".",
   "ignore": [
     "firebase.json",
     "**/.*",

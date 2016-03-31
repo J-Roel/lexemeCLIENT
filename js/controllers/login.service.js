@@ -42,7 +42,7 @@ function APILogin($rootScope, $http, $location, $window) {
 			
 
 			//Call our server to authenticate and get token
-			$http.post('http://localhost:3000/auth', user)
+			$http.post('//mysterious-bastion-48043.herokuapp.com/auth', user)
 	  		.success(function (data, status, headers, config) {
 	  			
 	  			if(data !== 'err'){
@@ -108,14 +108,14 @@ function APILogin($rootScope, $http, $location, $window) {
 		//correctly.
 		//When this is called it access a the API on a protected route
 		//and returns some data... in this case it should return foo
-		callRestricted : function(){
+		// callRestricted : function(){
 
-			$http({url: 'http://localhost:3000/auth/restricted', method: 'GET'})
-			.success(function (data, status, headers, config) {
-				console.log(data.name); // Should log 'foo'
-			})
+		// 	$http({url: '//mysterious-bastion-48043.herokuapp.com/auth/restricted', method: 'GET'})
+		// 	.success(function (data, status, headers, config) {
+		// 		console.log(data.name); // Should log 'foo'
+		// 	})
 
-  		},//END CALL RESTRICTED
+  // 		},//END CALL RESTRICTED
 
 
 

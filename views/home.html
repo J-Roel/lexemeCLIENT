@@ -18,13 +18,13 @@
 		<div class="one-fourth">
 			<button ng-model="MC.showRegistration" ng-click="MC.showRegistration = !MC.showRegistration; MC.showLogin=false;" class="centered btn btn-reg btn-front">REGISTER</button>
 			<div ng-show="MC.showRegistration">
-				<div ng-include="'../views/partials/register'"></div>
+				<div ng-include src="'../views/partials/register.html'"></div>
 			</div>
 		</div>
 		<div class="one-fourth">
 			<button ng-model="MC.showLogin" ng-click="MC.showLogin = !MC.showLogin; MC.showRegistration=false;" class="centered btn btn-reg btn-front">LOGIN</button>
 			<div ng-show="MC.showLogin">
-				<div ng-include="'../views/partials/login'"></div>
+				<div ng-include src="'../views/partials/login.html'"></div>
 			</div>
 		</div>
 		
@@ -42,15 +42,8 @@
 
 
 <!-- SECTION TWO -->
-<div id="how-it-works-section">
-<a class="float-right pad" href="#top"><i class="fa fa-chevron-circle-up fa-2x inset-item c-pointer"></i></a>
-<a class="float-right pad" href="#contact-section"><i class="fa fa-chevron-circle-down fa-2x inset-item c-pointer"></i></a>
-<section class="container row section section-two">
 
-	<h1>See... this is how it works</h1>
 
-	
-</section>
 
 
 

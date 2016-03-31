@@ -1,13 +1,13 @@
 <section class="container row">
-	<div ng-include src="'../views/partials/header'"></div>
+	<div ng-include src="'../views/partials/header.html'"></div>
 </section>
 
 <div class="container row" ng-controller="DashboardCtrl as DashC">
 		<section class="one-fourth vh lite-fill">
-				<div ng-include src="'../views/partials/sidebar'"></div>
+				<div ng-include src="'../views/partials/sidebar.html'"></div>
 		</section>
 		<section class="three-fourth">
-			<div ng-include src="'../views/partials/topbar'"></div>
+			<div ng-include src="'../views/partials/topbar.html'"></div>
 			
 				<div class="group-container"> 
 				<div ng-controller="ProjectCtrl as PC">
@@ -25,5 +25,5 @@
 
 
 
-<div ng-include src="'../views/partials/footer'"></div>
+<div ng-include src="'../views/partials/footer.html'"></div>
 

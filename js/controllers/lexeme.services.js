@@ -4,7 +4,7 @@ app.service( 'APIService', ['$http', APIService]);
 
 function APIService($http){
 	return {
-			rootUrl : 'http://localhost:3000/',
+			rootUrl : 'https://mysterious-bastion-48043.herokuapp.com/',
 
 			callinfo : {
 				method: 'GET',

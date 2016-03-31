@@ -81,7 +81,7 @@ function DashboardCtrl($scope){
         //to work
         //Default is notifications
         function getPartialUrl(){
-        		return '../views/partials/' + vm.partialId;
+        		return '../views/partials/' + vm.partialId + '.html';
       	}
 
 

@@ -1,4 +1,6 @@
 <h1>Lexeme</h1>
+<img src="http://www.jeremyroelfs.com/blog/wp-content/uploads/2016/04/Screen-Shot-2016-04-06-at-12.36.36-PM-e1459968008962.png">
+
 <h4>WYSIWYG creation and collaboration platform</h4>
 <hr/>
 <h3>Description</h3>

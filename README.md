@@ -4,7 +4,15 @@
 <h4>WYSIWYG creation and collaboration platform</h4>
 <hr/>
 <h3>Description</h3>
-<p>Lexeme; pronounced 'lex-seem'. Is an abstract communication tool. Lexeme allows fast wireframing right on the DOM while allowing users to track their user stories and "to-dos"
+<p>Lexeme; pronounced 'lex-seem'. Is an abstract communication tool. Lexeme allows fast wireframing right on the DOM while allowing users to track their user stories in an Agile way.
+
+<h4>Technologies</h4>
+<ul>
+<li>Node.js</li>
+<li>Node.js</li>
+<li>Node.js</li>
+
+Features:
 
 
 
